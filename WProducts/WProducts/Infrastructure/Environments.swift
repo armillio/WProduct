@@ -17,9 +17,9 @@ enum Environment {
     var baseURL: String {
         switch self {
         case .development:
-            return ""
+            return "https://mobile-tha-server.firebaseapp.com"
         case .production:
-            return ""
+            return "https://mobile-tha-server.firebaseapp.com"
         }
     }
 

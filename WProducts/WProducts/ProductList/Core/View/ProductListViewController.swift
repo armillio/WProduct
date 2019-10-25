@@ -9,8 +9,6 @@ class ProductListViewController: UIViewController {
     var presenter: ProductListPresenter?
     var viewModel: ProductListViewModel?
 
-    lazy var baseCellController = BaseCellController()
-
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)

@@ -35,8 +35,10 @@
 		477E0AB2236344330003AE52 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477E0AB0236344330003AE52 /* ProductCollectionViewCell.swift */; };
 		477E0AB3236344330003AE52 /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 477E0AB1236344330003AE52 /* ProductCollectionViewCell.xib */; };
 		477E0AB6236344730003AE52 /* UICollectionView+RegisterNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477E0AB5236344730003AE52 /* UICollectionView+RegisterNib.swift */; };
-		477E0AB82363447B0003AE52 /* BaseCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477E0AB72363447B0003AE52 /* BaseCellController.swift */; };
 		477E0ABA236357D20003AE52 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477E0AB9236357D20003AE52 /* UIImageView.swift */; };
+		477E0ABC23635CAC0003AE52 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477E0ABB23635CAC0003AE52 /* UICollectionView.swift */; };
+		477E0ABE23635D9E0003AE52 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477E0ABD23635D9E0003AE52 /* UILabel.swift */; };
+		477E0AC023635E420003AE52 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477E0ABF23635E420003AE52 /* UIImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,8 +72,10 @@
 		477E0AB0236344330003AE52 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		477E0AB1236344330003AE52 /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
 		477E0AB5236344730003AE52 /* UICollectionView+RegisterNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+RegisterNib.swift"; sourceTree = "<group>"; };
-		477E0AB72363447B0003AE52 /* BaseCellController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCellController.swift; sourceTree = "<group>"; };
 		477E0AB9236357D20003AE52 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		477E0ABB23635CAC0003AE52 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		477E0ABD23635D9E0003AE52 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		477E0ABF23635E420003AE52 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				4757695823626BC1005801D1 /* BaseNavigationController.swift */,
-				477E0AB72363447B0003AE52 /* BaseCellController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -257,7 +260,10 @@
 			isa = PBXGroup;
 			children = (
 				477E0AB5236344730003AE52 /* UICollectionView+RegisterNib.swift */,
+				477E0ABB23635CAC0003AE52 /* UICollectionView.swift */,
 				477E0AB9236357D20003AE52 /* UIImageView.swift */,
+				477E0ABD23635D9E0003AE52 /* UILabel.swift */,
+				477E0ABF23635E420003AE52 /* UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -342,10 +348,12 @@
 				47576956236269AE005801D1 /* Container+Builders.swift in Sources */,
 				477E0AB2236344330003AE52 /* ProductCollectionViewCell.swift in Sources */,
 				4757693A23626037005801D1 /* ProductContract.swift in Sources */,
+				477E0ABE23635D9E0003AE52 /* UILabel.swift in Sources */,
 				4757693D23626037005801D1 /* ProductListDefaultInteractorManager.swift in Sources */,
+				477E0ABC23635CAC0003AE52 /* UICollectionView.swift in Sources */,
 				4757694123626037005801D1 /* ProductListContract.swift in Sources */,
 				4757693623626037005801D1 /* ProductDefaultInteractorManager.swift in Sources */,
-				477E0AB82363447B0003AE52 /* BaseCellController.swift in Sources */,
+				477E0AC023635E420003AE52 /* UIImage.swift in Sources */,
 				4757695923626BC1005801D1 /* BaseNavigationController.swift in Sources */,
 				475769482362604F005801D1 /* Environments.swift in Sources */,
 				475769472362604F005801D1 /* ApplicationConstants.swift in Sources */,

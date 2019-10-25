@@ -30,7 +30,7 @@ final class WalmartHTTPRequestDefault: WalmartHTTPRequest {
                         let longDescription:String? = product["longDescription"] as? String ?? ""
                         let price:String? = product["price"] as? String ?? ""
                         let image:String? = product["productImage"] as? String ?? ""
-                        let reviewRating:NSNumber? = product["reviewRating"] as? NSNumber ?? 0
+                        let reviewRating:Double? = product["reviewRating"] as? Double ?? 0
                         let reviewCount:Int? = product["reviewCount"] as? Int ?? 0
                         let inStock:Bool = (product["inStock"] != nil)
                         

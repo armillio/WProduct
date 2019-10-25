@@ -10,7 +10,7 @@ struct Product {
     let longDescription: String?
     let price: String?
     let image: String?
-    let reviewRating: NSNumber?
+    let reviewRating: Double?
     let reviewCount: Int?
     let inStock: Bool
 }
@@ -22,7 +22,7 @@ struct ProductViewModel {
     let longDescription: String?
     let price: String?
     let image: String?
-    let reviewRating: NSNumber?
+    let reviewRating: Double?
     let reviewCount: Int?
     let inStock: Bool
     

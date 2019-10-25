@@ -10,8 +10,8 @@ struct Product {
     let longDescription: String?
     let price: String?
     let image: String?
-    let reviewRating: Int
-    let reviewCount: Int
+    let reviewRating: NSNumber?
+    let reviewCount: Int?
     let inStock: Bool
 }
 
@@ -22,8 +22,8 @@ struct ProductViewModel {
     let longDescription: String?
     let price: String?
     let image: String?
-    let reviewRating: Int
-    let reviewCount: Int
+    let reviewRating: NSNumber?
+    let reviewCount: Int?
     let inStock: Bool
     
     init(product: Product) {

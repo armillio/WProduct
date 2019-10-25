@@ -38,6 +38,7 @@
 		477E0AC4236363DF0003AE52 /* WalmartHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477E0AC3236363DF0003AE52 /* WalmartHTTPRequest.swift */; };
 		477E0AC7236364B70003AE52 /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 477E0AC5236364B70003AE52 /* ProductCollectionViewCell.xib */; };
 		477E0AC8236364B70003AE52 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477E0AC6236364B70003AE52 /* ProductCollectionViewCell.swift */; };
+		477E0ACA236391E40003AE52 /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477E0AC9236391E40003AE52 /* CosmosDistrib.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		477E0AC3236363DF0003AE52 /* WalmartHTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalmartHTTPRequest.swift; sourceTree = "<group>"; };
 		477E0AC5236364B70003AE52 /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
 		477E0AC6236364B70003AE52 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		477E0AC9236391E40003AE52 /* CosmosDistrib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 			children = (
 				475769512362650C005801D1 /* Default-568h@2x.png */,
 				4757691823625E14005801D1 /* LaunchScreen.storyboard */,
+				477E0AC9236391E40003AE52 /* CosmosDistrib.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				477E0AB6236344730003AE52 /* UICollectionView+RegisterNib.swift in Sources */,
 				47576956236269AE005801D1 /* Container+Builders.swift in Sources */,
 				4757693A23626037005801D1 /* ProductContract.swift in Sources */,
+				477E0ACA236391E40003AE52 /* CosmosDistrib.swift in Sources */,
 				477E0ABE23635D9E0003AE52 /* UILabel.swift in Sources */,
 				477E0AC4236363DF0003AE52 /* WalmartHTTPRequest.swift in Sources */,
 				477E0AC8236364B70003AE52 /* ProductCollectionViewCell.swift in Sources */,

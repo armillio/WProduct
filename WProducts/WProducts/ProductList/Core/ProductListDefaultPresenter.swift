@@ -22,7 +22,7 @@ class ProductListDefaultPresenter: ProductListPresenter {
     // MARK: - ProductListPresenter
 
     func loadData(fromRefresh refresh: Bool) {
-        interactorManager.getProductListData(withPage: 1, pageSize: 20) { (products, error) in
+        interactorManager.getProductListData(withPage: 1, pageSize: 30) { (products, error) in
             if error != nil {
                 //self.view?.displayEmptyScreen(withText: "ERROR synchronizing with server")
             } else {

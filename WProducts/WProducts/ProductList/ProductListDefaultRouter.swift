@@ -10,4 +10,7 @@ class ProductListDefaultRouter: ProductListRouter {
 
     // MARK - Navigation funcions
 
+    func navigateToProductDetail(withProduct product: ProductViewModel) {
+    
+    }
 }

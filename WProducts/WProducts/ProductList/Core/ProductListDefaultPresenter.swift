@@ -2,7 +2,7 @@
 import Foundation
 
 struct ProductListViewModel {
-
+    let products: [ProductViewModel]
 }
 
 // MARK: - Main Class
@@ -21,11 +21,29 @@ class ProductListDefaultPresenter: ProductListPresenter {
 
     // MARK: - ProductListPresenter
 
+    func loadData(fromRefresh refresh: Bool) {
+        interactorManager.getProductListData(withPage: 1, pageSize: 30) { (products, error) in
+            if error != nil {
+                //self.view?.displayEmptyScreen(withText: "ERROR synchronizing with server")
+            } else {
+                if let products = products {
+                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
+                    self.view?.displayProductList(viewModel)
+                    print("Products fetched from server")
+                }
+            }
+        }
+    }
+    
+    func loadNextPage() {
+        
+    }
 }
 
 // MARK: - Model Builder
 class ProductListViewModelBuilder {
-    func buildViewModel() -> ProductListViewModel {
-        return ProductListViewModel()
+    func buildViewModel(withProducts products: [Product]) -> ProductListViewModel {
+        let productsViewModel = products.compactMap(ProductViewModel.init)
+        return ProductListViewModel(products: productsViewModel)
     }
 }

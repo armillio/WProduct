@@ -131,10 +131,10 @@
 		4757692223626037005801D1 /* Product */ = {
 			isa = PBXGroup;
 			children = (
-				4757692323626037005801D1 /* Core */,
 				4757692923626037005801D1 /* ProductContract.swift */,
 				4757692A23626037005801D1 /* ProductDefaultBuilder.swift */,
 				4757692B23626037005801D1 /* ProductDefaultRouter.swift */,
+				4757692323626037005801D1 /* Core */,
 			);
 			name = Product;
 			path = WProducts/Product;
@@ -162,10 +162,10 @@
 		4757692C23626037005801D1 /* ProductList */ = {
 			isa = PBXGroup;
 			children = (
-				4757692D23626037005801D1 /* Core */,
 				4757693323626037005801D1 /* ProductListContract.swift */,
 				4757693423626037005801D1 /* ProductListDefaultBuilder.swift */,
 				4757693523626037005801D1 /* ProductListDefaultRouter.swift */,
+				4757692D23626037005801D1 /* Core */,
 			);
 			name = ProductList;
 			path = WProducts/ProductList;

@@ -31,6 +31,15 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
     }
 
     func setNavigationBarStyleDefault() {
-        navigationBar.isHidden = true
+        navigationBar.isHidden = false
+        navigationBar.barStyle = .default
+        navigationBar.tintColor = UIColor(named: "backgrounds")
+        navigationBar.isTranslucent = false
+        navigationBar.barTintColor = UIColor(named: "lightBlue")
+
+        let navBarTextColor = UIColor(named: "backgrounds")
+        let navBarTextFont = UIFont.preferredFont(forTextStyle: .body)
+        let navBarTextAttributes = [NSAttributedString.Key.foregroundColor: navBarTextColor, NSAttributedString.Key.font: navBarTextFont]
+        navigationBar.titleTextAttributes = navBarTextAttributes as [NSAttributedString.Key : Any]
     }
 }

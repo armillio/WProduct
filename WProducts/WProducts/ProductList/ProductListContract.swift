@@ -10,7 +10,7 @@ protocol ProductListInteractorManager {
 }
 
 protocol ProductListPresenter {
-
+    func loadData(fromRefresh refresh: Bool)
 }
 
 protocol ProductListView: class {

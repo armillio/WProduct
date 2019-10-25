@@ -2,7 +2,7 @@
 import UIKit
 
 protocol ProductBuilder {
-    func buildProductModule() -> UIViewController?
+    func buildProductModule(withProduct product: ProductViewModel) -> UIViewController?
 }
 
 protocol ProductInteractorManager {

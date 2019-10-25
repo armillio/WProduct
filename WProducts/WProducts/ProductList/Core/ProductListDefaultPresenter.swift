@@ -2,7 +2,7 @@
 import Foundation
 
 struct ProductListViewModel {
-
+    let products: [ProductViewModel]
 }
 
 // MARK: - Main Class
@@ -21,11 +21,15 @@ class ProductListDefaultPresenter: ProductListPresenter {
 
     // MARK: - ProductListPresenter
 
+    func loadData(fromRefresh refresh: Bool) {
+        
+    }
 }
 
 // MARK: - Model Builder
 class ProductListViewModelBuilder {
-    func buildViewModel() -> ProductListViewModel {
-        return ProductListViewModel()
+    func buildViewModel(withProducts products: [Product]) -> ProductListViewModel {
+        let productsViewModel = products.compactMap(ProductViewModel.init)
+        return ProductListViewModel(products: productsViewModel)
     }
 }

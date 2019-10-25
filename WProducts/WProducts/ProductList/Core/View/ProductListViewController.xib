@@ -31,7 +31,7 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="cWp-Dh-jrw">
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="cWp-Dh-jrw">
                     <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
                     <color key="tintColor" name="Green"/>
                 </activityIndicatorView>
@@ -51,7 +51,7 @@
     </objects>
     <resources>
         <namedColor name="Green">
-            <color red="0.36470588235294116" green="0.59215686274509804" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.36500000953674316" green="0.59200000762939453" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

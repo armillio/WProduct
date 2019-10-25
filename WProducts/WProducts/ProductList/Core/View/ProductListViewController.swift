@@ -8,7 +8,7 @@ class ProductListViewController: UIViewController {
     
     var presenter: ProductListPresenter?
     var viewModel: ProductListViewModel?
-
+    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
@@ -25,7 +25,11 @@ class ProductListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        displayActivityIndicator()
+        configureNavigationBar()
+        configureCollectionView()
+        configureLayout()
+        presenter?.loadData(fromRefresh: true)
     }
     
     fileprivate func configureNavigationBar() {
@@ -58,7 +62,23 @@ class ProductListViewController: UIViewController {
 // MARK: - ProductListView
 
 extension ProductListViewController: ProductListView {
-
+    func displayActivityIndicator() {
+        activityIndicator.startAnimating()
+    }
+    
+    func displayProductList(_ viewModel: ProductListViewModel) {
+        DispatchQueue.main.async {
+            if self.activityIndicator.isAnimating {
+                self.activityIndicator.stopAnimating()
+            }
+            if self.refreshControl.isRefreshing {
+                self.refreshControl.endRefreshing()
+            }
+            self.viewModel = viewModel
+            self.collectionView.reloadData()
+            self.collectionView.scrollsToTop = true
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -73,7 +93,7 @@ extension ProductListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
     }
 }
 

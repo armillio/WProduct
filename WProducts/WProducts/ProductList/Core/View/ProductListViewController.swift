@@ -111,7 +111,8 @@ extension ProductListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        guard let product = self.viewModel?.products[indexPath.row] else { return }
+        presenter?.showProductDetail(withProduct: product)
     }
 }
 

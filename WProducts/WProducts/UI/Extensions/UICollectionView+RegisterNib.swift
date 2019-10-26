@@ -3,7 +3,6 @@ import UIKit
 
 protocol UICollectionViewCellStaticProtocol {
     static func cellIdentifier() -> String
-    //static func cellHeight(w) -> CGFloat
 }
 
 extension UICollectionViewCellStaticProtocol {

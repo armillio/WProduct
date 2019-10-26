@@ -33,8 +33,7 @@ final class WalmartHTTPRequestDefault: WalmartHTTPRequest {
                         let reviewRating:Double? = product["reviewRating"] as? Double ?? 0
                         let reviewCount:Int? = product["reviewCount"] as? Int ?? 0
                         let inStock:Bool = (product["inStock"] != nil)
-                        
-                        products.append(Product.init(id: productId, name: name, shortDescription: shortDescription, longDescription: longDescription, price: price, image: image, reviewRating: reviewRating, reviewCount: reviewCount, inStock: inStock))
+                        products.append(Product.init(id: productId, name: name, shortDescription: shortDescription, longDescription: longDescription, price: price, image: image, reviewRating: reviewRating, reviewCount: reviewCount, inStock: inStock, page: page))
                     }
                     completion(products, nil)
                 } else {

@@ -2,7 +2,7 @@
 import Foundation
 
 struct ProductListViewModel {
-    let products: [ProductViewModel]
+    var products: [ProductViewModel]
 }
 
 // MARK: - Main Class
@@ -11,8 +11,12 @@ class ProductListDefaultPresenter: ProductListPresenter {
     private let router: ProductListRouter
     private weak var view: ProductListView?
 
-    private let viewModelBuilder = ProductListViewModelBuilder()
+    private var viewModelBuilder = ProductListViewModelBuilder()
+    fileprivate var viewModel: ProductListViewModel?
 
+    fileprivate var currentPage = 1
+    fileprivate var nextPageIsLoading = false
+    
     init(interactorManager: ProductListInteractorManager, router: ProductListRouter, view: ProductListView) {
         self.interactorManager = interactorManager
         self.router = router
@@ -22,12 +26,17 @@ class ProductListDefaultPresenter: ProductListPresenter {
     // MARK: - ProductListPresenter
 
     func loadData(fromRefresh refresh: Bool) {
-        interactorManager.getProductListData(withPage: 1, pageSize: 30) { (products, error) in
+        if !refresh {
+            self.view?.displayActivityIndicator()
+        }
+        interactorManager.getProductListData(withPage: 1, pageSize: 20) { (products, error) in
             if error != nil {
                 //self.view?.displayEmptyScreen(withText: "ERROR synchronizing with server")
             } else {
+                self.currentPage = 1
                 if let products = products {
-                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
+                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products, currentPage: self.currentPage)
+                    self.viewModel = viewModel
                     self.view?.displayProductList(viewModel)
                     print("Products fetched from server")
                 }
@@ -36,13 +45,33 @@ class ProductListDefaultPresenter: ProductListPresenter {
     }
     
     func loadNextPage() {
-        
+        if !self.nextPageIsLoading {
+            self.nextPageIsLoading = true
+            self.currentPage += 1
+            print(self.currentPage)
+            interactorManager.getProductListData(withPage: self.currentPage, pageSize: 30) { (products, error) in
+                if let products = products {
+                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products, currentPage: self.currentPage)
+                    self.viewModel?.products.append(contentsOf: viewModel.products)
+                    guard let _viewModel = self.viewModel else { return }
+                    self.view?.displayPaginatedList(withViewModel: _viewModel)
+                    self.nextPageIsLoading = false
+                } else {
+                    self.view?.updateNoMoreData()
+                    self.nextPageIsLoading = false
+                }
+            }
+        }
+    }
+    
+    func showProductDetail(withProduct product: ProductViewModel){
+        router.navigateToProductDetail(withProduct: product)
     }
 }
 
 // MARK: - Model Builder
 class ProductListViewModelBuilder {
-    func buildViewModel(withProducts products: [Product]) -> ProductListViewModel {
+    func buildViewModel(withProducts products: [Product], currentPage: Int) -> ProductListViewModel {
         let productsViewModel = products.compactMap(ProductViewModel.init)
         return ProductListViewModel(products: productsViewModel)
     }

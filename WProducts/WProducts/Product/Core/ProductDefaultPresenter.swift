@@ -3,7 +3,7 @@ import Foundation
 
 // Model
 
-struct Product {
+struct Product:Hashable {
     let id: String
     let name: String
     let shortDescription: String?

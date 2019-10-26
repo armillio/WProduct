@@ -10,10 +10,10 @@ class ProductListDefaultPresenter: ProductListPresenter {
     private let interactorManager: ProductListInteractorManager
     private let router: ProductListRouter
     private weak var view: ProductListView?
-
+    
     private var viewModelBuilder = ProductListViewModelBuilder()
     fileprivate var viewModel: ProductListViewModel?
-
+    
     fileprivate var currentPage = 1
     fileprivate var nextPageIsLoading = false
     
@@ -22,9 +22,9 @@ class ProductListDefaultPresenter: ProductListPresenter {
         self.router = router
         self.view = view
     }
-
+    
     // MARK: - ProductListPresenter
-
+    
     func loadData(fromRefresh refresh: Bool) {
         if !refresh {
             self.view?.displayActivityIndicator()
@@ -35,6 +35,7 @@ class ProductListDefaultPresenter: ProductListPresenter {
             } else {
                 self.currentPage = 1
                 if let products = products {
+                    ProductsManager.shared.addProducts(products: products)
                     let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products, currentPage: self.currentPage)
                     self.viewModel = viewModel
                     self.view?.displayProductList(viewModel)
@@ -48,9 +49,9 @@ class ProductListDefaultPresenter: ProductListPresenter {
         if !self.nextPageIsLoading {
             self.nextPageIsLoading = true
             self.currentPage += 1
-            print(self.currentPage)
             interactorManager.getProductListData(withPage: self.currentPage, pageSize: 30) { (products, error) in
                 if let products = products {
+                    ProductsManager.shared.addProducts(products: products)
                     let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products, currentPage: self.currentPage)
                     self.viewModel?.products.append(contentsOf: viewModel.products)
                     guard let _viewModel = self.viewModel else { return }

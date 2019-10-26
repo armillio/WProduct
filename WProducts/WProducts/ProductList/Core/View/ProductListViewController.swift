@@ -9,6 +9,8 @@ class ProductListViewController: UIViewController {
     var presenter: ProductListPresenter?
     var viewModel: ProductListViewModel?
     
+    fileprivate var hasMoreData = true
+    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
@@ -77,6 +79,22 @@ extension ProductListViewController: ProductListView {
             self.viewModel = viewModel
             self.collectionView.reloadData()
             self.collectionView.scrollsToTop = true
+            self.hasMoreData = true
+        }
+    }
+    
+    func displayPaginatedList(withViewModel viewModel: ProductListViewModel) {
+        DispatchQueue.main.async {
+            self.viewModel = viewModel
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func updateNoMoreData() {
+        DispatchQueue.main.async {
+            self.hasMoreData = false
+            self.refreshControl.endRefreshing()
+            self.activityIndicator.stopAnimating()
         }
     }
 }
@@ -103,6 +121,18 @@ extension ProductListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? ProductCollectionViewCell, let product = viewModel?.products[indexPath.row] else { return }
         cell.configureCell(withProduct: product)
+    }
+    
+    // MARK: - UIScrollViewDelegate
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.manageInfiniteScroll(forScroll: scrollView)
+    }
+    
+    fileprivate func manageInfiniteScroll(forScroll scrollView: UIScrollView) {
+        if self.scrollViewDidDragDownFromBottom(collectionView) && self.hasMoreData {
+            self.presenter?.loadNextPage()
+        }
     }
 }
 

@@ -13,6 +13,7 @@ struct Product {
     let reviewRating: Double?
     let reviewCount: Int?
     let inStock: Bool
+    let page: Int
 }
 
 struct ProductViewModel {
@@ -25,7 +26,8 @@ struct ProductViewModel {
     let reviewRating: Double?
     let reviewCount: Int?
     let inStock: Bool
-    
+    let page: Int
+
     init(product: Product) {
         self.id = product.id
         self.name = product.name
@@ -36,6 +38,7 @@ struct ProductViewModel {
         self.reviewRating = product.reviewRating
         self.reviewCount = product.reviewCount
         self.inStock = product.inStock
+        self.page = product.page
     }
 }
 

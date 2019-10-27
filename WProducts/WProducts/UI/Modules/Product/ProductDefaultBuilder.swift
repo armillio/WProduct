@@ -8,8 +8,8 @@ class ProductDefaultBuilder: ProductBuilder {
     var view: ProductView?
 
     // MARK: - ProductBuilder protocol
-    func buildProductModule(withProduct product: ProductViewModel) -> UIViewController? {
-        buildView(withProduct: product)
+    func buildProductModule(_ product: ProductViewModel? = nil) -> UIViewController? {
+        buildView(product)
         buildRouter()
         buildInteractor()
         buildPresenter()
@@ -18,8 +18,8 @@ class ProductDefaultBuilder: ProductBuilder {
     }
 
     // MARK: - Private
-    private func buildView(withProduct product: ProductViewModel) {
-        view = ProductViewController(withProduct: product)
+    private func buildView(_ product: ProductViewModel?) {
+        view = ProductViewController(product)
     }
 
     private func buildRouter() {

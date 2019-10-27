@@ -10,20 +10,12 @@ class ProductListViewController: UIViewController {
     var viewModel: ProductListViewModel?
     
     fileprivate var hasMoreData = true
-    
+
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
         return refreshControl
     }()
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +24,7 @@ class ProductListViewController: UIViewController {
         configureCollectionView()
         configureLayout()
         presenter?.loadData(fromRefresh: true)
+        SplitViewCoordinator.shared.invokeSetDelegate()
     }
     
     fileprivate func configureNavigationBar() {
@@ -149,7 +142,12 @@ extension ProductListViewController: UICollectionViewDelegateFlowLayout{
             width = view.frame.size.width
         }
         
-        let newWidth = collectionView.widthOfCell(withSafeArea: width, withList: viewModel?.products.count)
+        var newWidth = collectionView.widthOfCell(withSafeArea: width, withList: viewModel?.products.count)
+
+        //if splitViewController?.isCollapsed == true {
+            newWidth = view.frame.size.width
+        //}
+
         let product = viewModel?.products[indexPath.row]
         let collectionViewCell = ProductCollectionViewCell()
         guard let height = collectionViewCell.cellHeight(withProduct: product, withContentViewWidth: newWidth) else{ return CGSize(width: newWidth, height: 100) }

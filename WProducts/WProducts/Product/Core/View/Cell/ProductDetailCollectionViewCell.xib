@@ -158,6 +158,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="418" height="547"/>
             <connections>
+                <outlet property="detailScrollView" destination="fxi-91-HKY" id="Fhm-ic-MAC"/>
                 <outlet property="productDescription" destination="vXo-FY-5ZT" id="UKL-rq-YYX"/>
                 <outlet property="productImage" destination="KBZ-vh-SaP" id="lMh-PE-QqD"/>
                 <outlet property="productLongDescription" destination="m2l-8Y-ONH" id="wFW-ts-yip"/>

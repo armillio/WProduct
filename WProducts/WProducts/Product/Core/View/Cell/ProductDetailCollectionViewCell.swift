@@ -2,7 +2,7 @@
 import UIKit
 
 class ProductDetailCollectionViewCell: UICollectionViewCell, UICollectionViewCellStaticProtocol {
-    
+    @IBOutlet weak var detailScrollView: UIScrollView!
     @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var productDescription: UILabel!
@@ -28,11 +28,12 @@ class ProductDetailCollectionViewCell: UICollectionViewCell, UICollectionViewCel
         if let imageURL = url {
             self.productImage.download(fromURL: imageURL)
         }
+        
         self.productDescription.attributedText = product.shortDescription?.html
         self.productDescription.adjustHeightOfLabel()
         
         self.productLongDescription.attributedText = product.longDescription?.html
         self.productLongDescription.isScrollEnabled = false
-        self.productLongDescription.sizeToFit()
+        self.productLongDescription.sizeToFit()        
     }
 }

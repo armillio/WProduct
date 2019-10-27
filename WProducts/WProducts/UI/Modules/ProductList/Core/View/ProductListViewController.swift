@@ -149,7 +149,12 @@ extension ProductListViewController: UICollectionViewDelegateFlowLayout{
             width = view.frame.size.width
         }
         
-        let newWidth = collectionView.widthOfCell(withSafeArea: width, withList: viewModel?.products.count)
+        var newWidth = collectionView.widthOfCell(withSafeArea: width, withList: viewModel?.products.count)
+
+        //if splitViewController?.isCollapsed == true {
+            newWidth = view.frame.size.width
+        //}
+
         let product = viewModel?.products[indexPath.row]
         let collectionViewCell = ProductCollectionViewCell()
         guard let height = collectionViewCell.cellHeight(withProduct: product, withContentViewWidth: newWidth) else{ return CGSize(width: newWidth, height: 100) }

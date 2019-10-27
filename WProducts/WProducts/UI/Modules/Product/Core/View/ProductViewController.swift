@@ -133,6 +133,6 @@ extension ProductViewController: UICollectionViewDelegateFlowLayout{
             height = view.frame.size.width
         }
         
-        return CGSize(width: width, height: height)
+        return CGSize(width: view.frame.size.width, height: height)
     }
 }

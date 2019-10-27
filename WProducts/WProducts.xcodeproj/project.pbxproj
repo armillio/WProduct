@@ -50,7 +50,6 @@
 		47A5BF4E23661C1900B2564D /* SplitDefaultBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A5BF4723661C1900B2564D /* SplitDefaultBuilder.swift */; };
 		47A5BF4F23661C1900B2564D /* SplitDefaultRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A5BF4823661C1900B2564D /* SplitDefaultRouter.swift */; };
 		47A5BF52236630EE00B2564D /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A5BF51236630EE00B2564D /* MulticastDelegate.swift */; };
-		47A5BF542366310500B2564D /* SplitViewCoordinatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A5BF532366310500B2564D /* SplitViewCoordinatorDelegate.swift */; };
 		47A8762B2363D3FF0095F709 /* UIScrollViewDelegate+DragDownFromBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A8762A2363D3FF0095F709 /* UIScrollViewDelegate+DragDownFromBottom.swift */; };
 /* End PBXBuildFile section */
 
@@ -100,7 +99,6 @@
 		47A5BF4723661C1900B2564D /* SplitDefaultBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitDefaultBuilder.swift; sourceTree = "<group>"; };
 		47A5BF4823661C1900B2564D /* SplitDefaultRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitDefaultRouter.swift; sourceTree = "<group>"; };
 		47A5BF51236630EE00B2564D /* MulticastDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
-		47A5BF532366310500B2564D /* SplitViewCoordinatorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewCoordinatorDelegate.swift; sourceTree = "<group>"; };
 		47A8762A2363D3FF0095F709 /* UIScrollViewDelegate+DragDownFromBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollViewDelegate+DragDownFromBottom.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -365,7 +363,6 @@
 			isa = PBXGroup;
 			children = (
 				47A5BF51236630EE00B2564D /* MulticastDelegate.swift */,
-				47A5BF532366310500B2564D /* SplitViewCoordinatorDelegate.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -467,7 +464,6 @@
 				4757693723626037005801D1 /* ProductDefaultPresenter.swift in Sources */,
 				47A5BF4E23661C1900B2564D /* SplitDefaultBuilder.swift in Sources */,
 				4757693C23626037005801D1 /* ProductDefaultRouter.swift in Sources */,
-				47A5BF542366310500B2564D /* SplitViewCoordinatorDelegate.swift in Sources */,
 				4730E4552364D490008C8873 /* ProductsManager.swift in Sources */,
 				4757694223626037005801D1 /* ProductListDefaultBuilder.swift in Sources */,
 				4730E45C2364F93F008C8873 /* String+Extended.swift in Sources */,

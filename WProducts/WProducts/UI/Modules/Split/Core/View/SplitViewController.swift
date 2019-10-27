@@ -4,31 +4,17 @@ import UIKit
 class SplitViewController: UISplitViewController {
     var presenter: SplitPresenter?
 
-    convenience init(_ empty: Bool = false) {
-        self.init(nibName: nil, bundle: nil)
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        SplitViewCoordinator.shared.addDelegate(self)
-    }
-    
-    deinit {
-        SplitViewCoordinator.shared.removeDelegate(self)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.delegate = self
-        
+        assignViewControllers()
+        configureUI()
+    }
+
+    // MARK: - Configuration
+    
+    func assignViewControllers(){
         let list = UINavigationController()
         let detail = UINavigationController()
-        
         guard let productViewController = self.productBuilder().buildProductModule(nil) else{ return }
         guard let productListViewController = self.productListBuilder().buildProductListModule() else{ return }
         
@@ -39,7 +25,10 @@ class SplitViewController: UISplitViewController {
         list.navigationItem.leftBarButtonItem = self.displayModeButtonItem
         
         self.viewControllers = [list, detail]
-        
+        self.delegate = self
+    }
+    
+    func configureUI(){
         self.preferredDisplayMode = .allVisible
         if let navigation = self.viewControllers.last as? UINavigationController {
             navigation.topViewController?.navigationItem.leftBarButtonItem = self.displayModeButtonItem

@@ -24,7 +24,6 @@ class ProductListViewController: UIViewController {
         configureCollectionView()
         configureLayout()
         presenter?.loadData(fromRefresh: true)
-        SplitViewCoordinator.shared.invokeSetDelegate()
     }
     
     fileprivate func configureNavigationBar() {

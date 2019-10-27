@@ -241,12 +241,12 @@
 		4757694D236260EB005801D1 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
-				477E0AC1236360F50003AE52 /* Repository */,
 				4757690A23625E12005801D1 /* AppDelegate.swift */,
 				475769442362604F005801D1 /* ApplicationConstants.swift */,
 				475769452362604F005801D1 /* Environments.swift */,
 				4757694C236260C9005801D1 /* Container */,
 				4730E4532364D41F008C8873 /* Managers */,
+				477E0AC1236360F50003AE52 /* Repository */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";

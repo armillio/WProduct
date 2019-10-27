@@ -40,23 +40,16 @@ class ProductViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        guard self.isViewDidLayoutCallFirstTime else { return }
-        self.collectionView.collectionViewLayout.collectionViewContentSize // It will required to re calculate collectionViewContentSize in internal method
-
-        DispatchQueue.main.async {
-            guard let indexPath = self.indexPath else{ return }
-            self.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
-            self.isViewDidLayoutCallFirstTime = false
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
         configureCollectionView()
         configureLayout()
+        
+        DispatchQueue.main.async {
+            guard let indexPath = self.indexPath else{ return }
+            self.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+        }
     }
     
     // MARK: - Configuration
@@ -119,9 +112,7 @@ extension ProductViewController: UICollectionViewDelegate {
     }
     
     fileprivate func manageInfiniteScroll(forScroll scrollView: UIScrollView) {
-        if self.scrollViewDidDragDownFromBottom(collectionView) && self.hasMoreData {
-            //self.presenter?.loadNextPage()
-        }
+        
     }
 }
 

@@ -45,11 +45,7 @@ class ProductViewController: UIViewController {
         configureNavigationBar()
         configureCollectionView()
         configureLayout()
-        
-        DispatchQueue.main.async {
-            guard let indexPath = self.indexPath else{ return }
-            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        }
+        selectedProduct()
     }
     
     // MARK: - Configuration
@@ -73,6 +69,15 @@ class ProductViewController: UIViewController {
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         flowLayout.scrollDirection = .horizontal
         collectionView.itemSize(withView: view, withFlowLayout: flowLayout, withCount: viewModel?.products.count ?? 0)
+    }
+    
+    // MARK: - Actions
+    
+    func selectedProduct(){
+        DispatchQueue.main.async {
+            guard let indexPath = self.indexPath else{ return }
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        }
     }
 }
 
@@ -120,12 +125,6 @@ extension ProductViewController: UICollectionViewDelegate {
 
 extension ProductViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize  {
-        
-        let safeWidth = view.safeAreaLayoutGuide.layoutFrame.size.width
-        var width = safeWidth
-        if  safeWidth == 0 {
-            width = view.frame.size.width
-        }
         
         let safeHeight = view.safeAreaLayoutGuide.layoutFrame.size.height
         var height = safeHeight

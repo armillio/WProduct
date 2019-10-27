@@ -42,6 +42,7 @@ class ProductViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.systemBackground
+        collectionView.isPagingEnabled = true
         collectionView.registerNib(ProductDetailCollectionViewCell.self)
     }
     
@@ -55,6 +56,7 @@ class ProductViewController: UIViewController {
 }
 
 // MARK: - ProductView
+
 extension ProductViewController: ProductView {
     
 }
@@ -81,6 +83,7 @@ extension ProductViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? ProductDetailCollectionViewCell, let product = viewModel?.products[indexPath.row] else { return }
         cell.productDetail = product
+        cell.configureCell()
     }
     
     // MARK: - UIScrollViewDelegate

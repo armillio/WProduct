@@ -5,6 +5,10 @@ import Foundation
 
 extension Container {
 
+    func splitBuilder() -> SplitBuilder {
+        return SplitDefaultBuilder()
+    }
+    
     func productListBuilder() -> ProductListBuilder {
         return ProductListDefaultBuilder()
     }

@@ -15,13 +15,13 @@ class SplitDefaultBuilder: SplitBuilder {
     var view: SplitView?
 
     // MARK: - SplitBuilder protocol
-    func buildSplitModule() -> UIViewController? {
+    func buildSplitModule() -> UISplitViewController? {
         buildView()
         buildRouter()
         buildInteractor()
         buildPresenter()
         buildCircularDependencies()
-        return view as? UIViewController
+        return view as? UISplitViewController
     }
 
     // MARK: - Private
@@ -30,7 +30,7 @@ class SplitDefaultBuilder: SplitBuilder {
     }
 
     private func buildRouter() {
-        guard let view = self.view as? UIViewController else {
+        guard let view = self.view as? UISplitViewController else {
             assert(false, "View has to be a UIViewController")
             return
         }

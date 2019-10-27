@@ -6,10 +6,10 @@
 //  Copyright (c) 2016, Happy Computer. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol SplitBuilder {
-    func buildSplitModule() -> UIViewController?
+    func buildSplitModule() -> UISplitViewController?
 }
 
 protocol SplitInteractorManager {

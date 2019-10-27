@@ -3,7 +3,7 @@ import UIKit
 
 class Container {
     static let shared = Container()
-    var mainRootViewController: UIViewController?
+    var mainRootViewController: UISplitViewController?
 }
 
 // MARK: - AppDelegate Injection
@@ -25,13 +25,18 @@ extension Container {
         return UIScreen.main
     }
     
-    func createMainRootViewController() -> UIViewController? {
-        guard let productListViewController = productListBuilder().buildProductListModule() else {
+    func createMainRootViewController() -> UISplitViewController? {
+        guard let splitViewController = splitBuilder().buildSplitModule() else {
             assert(false, "Root Module failed to build. Check your DI setup.")
             return nil
         }
-        let productsViewController = BaseNavigationController(rootViewController: productListViewController)
-        return productsViewController
+        
+        /*guard let productListViewController = productListBuilder().buildProductListModule() else {
+            assert(false, "Root Module failed to build. Check your DI setup.")
+            return nil
+        }*/
+        //let productsViewController = BaseNavigationController(rootViewController: splitViewController)
+        return splitViewController
     }
 }
 

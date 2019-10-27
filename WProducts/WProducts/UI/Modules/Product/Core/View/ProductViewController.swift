@@ -16,7 +16,7 @@ class ProductViewController: UIViewController {
     
     fileprivate var hasMoreData = true
     
-    convenience init(withProduct product: ProductViewModel) {
+    convenience init(_ product: ProductViewModel? = nil) {
         self.init(nibName: nil, bundle: nil)
         self.product = product
         guard let products = ProductsManager.shared.fetchProducts() else{ return }
@@ -25,7 +25,7 @@ class ProductViewController: UIViewController {
         
         
         guard let indexPath = products.firstIndex(where: {
-            $0.id == product.id
+            $0.id == product?.id
         }).flatMap({
             IndexPath(row: $0, section: 0)
         }) else { return }

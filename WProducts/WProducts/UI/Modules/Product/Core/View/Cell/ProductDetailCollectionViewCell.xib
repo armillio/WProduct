@@ -100,6 +100,9 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2l-8Y-ONH">
                                         <rect key="frame" x="16" y="383.5" width="386" height="147.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="147.5" id="o2l-S0-LZ6"/>
+                                        </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="&lt;p&gt;&lt;span style=&quot;color:#FF0000;&quot;&gt;&lt;b&gt;White Glove Delivery Included&lt;/b&gt;&lt;/span&gt;&lt;/p&gt;">
                                                 <attributes>
@@ -121,11 +124,11 @@
                                     <constraint firstItem="m2l-8Y-ONH" firstAttribute="leading" secondItem="t7w-PI-hN5" secondAttribute="leading" constant="16" id="GcS-xg-KdM"/>
                                     <constraint firstAttribute="trailing" secondItem="m2l-8Y-ONH" secondAttribute="trailing" constant="16" id="L6l-8G-clU"/>
                                     <constraint firstItem="m2l-8Y-ONH" firstAttribute="top" secondItem="vXo-FY-5ZT" secondAttribute="bottom" constant="8" id="OHZ-QN-c33"/>
+                                    <constraint firstAttribute="bottom" secondItem="m2l-8Y-ONH" secondAttribute="bottom" constant="16" id="RVr-9Y-hd9"/>
                                     <constraint firstItem="ut0-GB-J3p" firstAttribute="leading" secondItem="t7w-PI-hN5" secondAttribute="leading" constant="16" id="UlM-Xi-dg3"/>
                                     <constraint firstItem="VzN-zr-rzO" firstAttribute="leading" secondItem="t7w-PI-hN5" secondAttribute="leading" constant="16" id="Znu-pp-ZSd"/>
                                     <constraint firstItem="lvH-00-OfE" firstAttribute="top" secondItem="t7w-PI-hN5" secondAttribute="top" constant="16" id="cmQ-vQ-1B8"/>
                                     <constraint firstAttribute="trailing" secondItem="vXo-FY-5ZT" secondAttribute="trailing" constant="16" id="eU7-LL-X1l"/>
-                                    <constraint firstAttribute="bottom" secondItem="m2l-8Y-ONH" secondAttribute="bottom" constant="16" id="kHC-77-zL4"/>
                                     <constraint firstItem="lvH-00-OfE" firstAttribute="leading" secondItem="t7w-PI-hN5" secondAttribute="leading" constant="16" id="kHZ-EU-AV5"/>
                                     <constraint firstItem="VzN-zr-rzO" firstAttribute="top" secondItem="lvH-00-OfE" secondAttribute="bottom" constant="8" id="nh1-ad-HiI"/>
                                     <constraint firstItem="KBZ-vh-SaP" firstAttribute="leading" secondItem="t7w-PI-hN5" secondAttribute="leading" constant="16" id="r2A-qG-17b"/>
@@ -162,6 +165,7 @@
                 <outlet property="productDescription" destination="vXo-FY-5ZT" id="UKL-rq-YYX"/>
                 <outlet property="productImage" destination="KBZ-vh-SaP" id="lMh-PE-QqD"/>
                 <outlet property="productLongDescription" destination="m2l-8Y-ONH" id="wFW-ts-yip"/>
+                <outlet property="productLongDescriptionHeightConstraint" destination="o2l-S0-LZ6" id="KYy-sO-2Ka"/>
                 <outlet property="productName" destination="lvH-00-OfE" id="eDU-T9-qtk"/>
                 <outlet property="productPrice" destination="ut0-GB-J3p" id="XR8-Kv-hAp"/>
                 <outlet property="reviewCount" destination="kTt-lD-0Jr" id="BLq-vH-jC3"/>

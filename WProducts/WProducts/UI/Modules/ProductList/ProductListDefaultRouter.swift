@@ -12,12 +12,9 @@ class ProductListDefaultRouter: ProductListRouter {
     
     func navigateToProductDetail(withProduct product: ProductViewModel) {
         if let productViewController = self.productBuilder().buildProductModule(product){
-            //self.viewController?.navigationController?.pushViewController(productViewController, animated: true)
-            
-            let nc = UINavigationController()
-            nc.viewControllers = [productViewController]
+            let navigation = UINavigationController()
+            navigation.viewControllers = [productViewController]
             self.viewController?.navigationController?.showDetailViewController(productViewController, sender: self)
-            
         }
     }
     

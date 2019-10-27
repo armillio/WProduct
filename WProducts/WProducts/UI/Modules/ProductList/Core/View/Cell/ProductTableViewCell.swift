@@ -1,14 +1,14 @@
 
 import UIKit
 
-class ProductCollectionViewCell: UICollectionViewCell, UICollectionViewCellStaticProtocol {
+class ProductTableViewCell: UITableViewCell, UITableViewCellStaticProtocol {
     
     @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var reviewCount: UILabel!
     @IBOutlet weak var reviewRating: CosmosView!
     @IBOutlet weak var productPrice: UILabel!
-        
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -16,7 +16,7 @@ class ProductCollectionViewCell: UICollectionViewCell, UICollectionViewCellStati
     func cellHeight(withProduct product: ProductViewModel?, withContentViewWidth contentWidth: CGFloat?) -> CGFloat? {
         guard let viewWidth = contentWidth else { return 0.0 }
         let contentViewWidth = viewWidth - (100.0 + 16.0 + 8.0 + 16.0)
-        
+        	
         let label = UILabel.init()
         
         let productName = label.determineLabelHeight(withWidth: contentViewWidth, withFont: UIFont.preferredFont(forTextStyle: .footnote), withText: product?.name)
@@ -32,7 +32,7 @@ class ProductCollectionViewCell: UICollectionViewCell, UICollectionViewCellStati
             calculatedHeight = 116
         }
         
-        return calculatedHeight  + 16.0 + 1.0
+        return calculatedHeight  + 16.0
     }
     
     func configureCell(withProduct product: ProductViewModel){

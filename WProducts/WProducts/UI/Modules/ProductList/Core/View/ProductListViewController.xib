@@ -11,8 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductListViewController" customModule="WProducts" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="cWp-Dh-jrw" id="2P7-Nd-cbC"/>
-                <outlet property="collectionView" destination="6fb-sa-ZvT" id="GeC-70-wJb"/>
-                <outlet property="flowLayout" destination="J0V-aA-Csc" id="ZHd-6w-uyn"/>
+                <outlet property="tableView" destination="4qb-bt-hYr" id="qqz-ls-Lor"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,16 +20,10 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="6fb-sa-ZvT">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4qb-bt-hYr">
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="J0V-aA-Csc">
-                        <size key="itemSize" width="50" height="50"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
+                </tableView>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="cWp-Dh-jrw">
                     <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
                     <color key="tintColor" name="Green"/>
@@ -38,11 +31,11 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="6fb-sa-ZvT" secondAttribute="bottom" id="1lb-tP-Wdh"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6fb-sa-ZvT" secondAttribute="trailing" id="6SL-DJ-9Pb"/>
-                <constraint firstItem="6fb-sa-ZvT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="9Kv-Bc-Bn0"/>
-                <constraint firstItem="6fb-sa-ZvT" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="PsD-XF-1B5"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="4qb-bt-hYr" secondAttribute="bottom" id="Jal-De-Mwo"/>
+                <constraint firstItem="4qb-bt-hYr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Tx3-wf-QbK"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4qb-bt-hYr" secondAttribute="trailing" id="WD3-iZ-keZ"/>
                 <constraint firstItem="cWp-Dh-jrw" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Xcj-zE-Qpe"/>
+                <constraint firstItem="4qb-bt-hYr" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="bVL-qi-gfR"/>
                 <constraint firstItem="cWp-Dh-jrw" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="pPv-IZ-jVJ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

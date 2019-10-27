@@ -2,14 +2,15 @@
 import UIKit
 
 class ProductListViewController: UIViewController {
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     var presenter: ProductListPresenter?
     var viewModel: ProductListViewModel?
     
     fileprivate var hasMoreData = true
+    
+    lazy var productTableViewCell = ProductTableViewCell()
 
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -21,8 +22,7 @@ class ProductListViewController: UIViewController {
         super.viewDidLoad()
         displayActivityIndicator()
         configureNavigationBar()
-        configureCollectionView()
-        configureLayout()
+        configureTableView()
         presenter?.loadData(fromRefresh: true)
     }
     
@@ -36,20 +36,14 @@ class ProductListViewController: UIViewController {
     
     // MARK: - Configuration
     
-    fileprivate func configureCollectionView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.backgroundColor = UIColor.systemBackground
-        collectionView.registerNib(ProductCollectionViewCell.self)
-        collectionView.addSubview(refreshControl)
+    fileprivate func configureTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        registerNibs()
     }
     
-    fileprivate func configureLayout() {
-        flowLayout.minimumInteritemSpacing = 0
-        flowLayout.minimumLineSpacing = 0
-        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        flowLayout.scrollDirection = .vertical
-        collectionView.itemSize(withView: view, withFlowLayout: flowLayout, withCount: viewModel?.products.count ?? 0)
+    fileprivate func registerNibs() {
+        tableView.registerNib(ProductTableViewCell.self)
     }
 }
 
@@ -69,8 +63,8 @@ extension ProductListViewController: ProductListView {
                 self.refreshControl.endRefreshing()
             }
             self.viewModel = viewModel
-            self.collectionView.reloadData()
-            self.collectionView.scrollsToTop = true
+            self.tableView.reloadData()
+            self.tableView.scrollsToTop = true
             self.hasMoreData = true
         }
     }
@@ -78,7 +72,7 @@ extension ProductListViewController: ProductListView {
     func displayPaginatedList(withViewModel viewModel: ProductListViewModel) {
         DispatchQueue.main.async {
             self.viewModel = viewModel
-            self.collectionView.reloadData()
+            self.tableView.reloadData()
         }
     }
     
@@ -91,29 +85,34 @@ extension ProductListViewController: ProductListView {
     }
 }
 
-// MARK: - UICollectionViewDataSource
+// MARK: - UITableViewDataSource
 
-extension ProductListViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension ProductListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.products.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.cellIdentifier(), for: indexPath)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let product = self.viewModel?.products[indexPath.row] else { return }
-        presenter?.showProductDetail(withProduct: product)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: ProductTableViewCell.cellIdentifier(), for: indexPath)
     }
 }
 
-// MARK: - UICollectionViewDelegate
+// MARK: - UITableViewDelegate
 
-extension ProductListViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? ProductCollectionViewCell, let product = viewModel?.products[indexPath.row] else { return }
+extension ProductListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? ProductTableViewCell, let product = viewModel?.products[indexPath.row] else { return }
         cell.configureCell(withProduct: product)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let product = viewModel?.products[indexPath.row] else { return 0.0 }
+        return productTableViewCell.cellHeight(withProduct: product, withContentViewWidth: self.view.bounds.width) ?? 0.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let product = self.viewModel?.products[indexPath.row] else { return }
+        presenter?.showProductDetail(withProduct: product)
     }
     
     // MARK: - UIScrollViewDelegate
@@ -123,34 +122,8 @@ extension ProductListViewController: UICollectionViewDelegate {
     }
     
     fileprivate func manageInfiniteScroll(forScroll scrollView: UIScrollView) {
-        if self.scrollViewDidDragDownFromBottom(collectionView) && self.hasMoreData {
+        if self.scrollViewDidDragDownFromBottom(tableView) && self.hasMoreData {
             self.presenter?.loadNextPage()
         }
-    }
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-
-extension ProductListViewController: UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize  {
-        
-        let safeWidth = view.safeAreaLayoutGuide.layoutFrame.size.width
-        var width = safeWidth
-        
-        if  safeWidth == 0 {
-            width = view.frame.size.width
-        }
-        
-        var newWidth = collectionView.widthOfCell(withSafeArea: width, withList: viewModel?.products.count)
-
-        //if splitViewController?.isCollapsed == true {
-            newWidth = view.frame.size.width
-        //}
-
-        let product = viewModel?.products[indexPath.row]
-        let collectionViewCell = ProductCollectionViewCell()
-        guard let height = collectionViewCell.cellHeight(withProduct: product, withContentViewWidth: newWidth) else{ return CGSize(width: newWidth, height: 100) }
-        
-        return CGSize(width: newWidth, height: height)
     }
 }

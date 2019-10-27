@@ -48,7 +48,7 @@ class ProductViewController: UIViewController {
         
         DispatchQueue.main.async {
             guard let indexPath = self.indexPath else{ return }
-            self.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
     }
     

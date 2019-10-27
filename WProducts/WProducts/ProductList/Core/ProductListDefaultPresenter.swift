@@ -36,7 +36,7 @@ class ProductListDefaultPresenter: ProductListPresenter {
                 self.currentPage = 1
                 if let products = products {
                     ProductsManager.shared.addProducts(products: products)
-                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products, currentPage: self.currentPage)
+                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
                     self.viewModel = viewModel
                     self.view?.displayProductList(viewModel)
                     print("Products fetched from server")
@@ -44,7 +44,7 @@ class ProductListDefaultPresenter: ProductListPresenter {
             }
         }
     }
-    
+
     func loadNextPage() {
         if !self.nextPageIsLoading {
             self.nextPageIsLoading = true
@@ -52,7 +52,7 @@ class ProductListDefaultPresenter: ProductListPresenter {
             interactorManager.getProductListData(withPage: self.currentPage, pageSize: 30) { (products, error) in
                 if let products = products {
                     ProductsManager.shared.addProducts(products: products)
-                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products, currentPage: self.currentPage)
+                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
                     self.viewModel?.products.append(contentsOf: viewModel.products)
                     guard let _viewModel = self.viewModel else { return }
                     self.view?.displayPaginatedList(withViewModel: _viewModel)
@@ -72,7 +72,7 @@ class ProductListDefaultPresenter: ProductListPresenter {
 
 // MARK: - Model Builder
 class ProductListViewModelBuilder {
-    func buildViewModel(withProducts products: [Product], currentPage: Int) -> ProductListViewModel {
+    func buildViewModel(withProducts products: [Product]) -> ProductListViewModel {
         let productsViewModel = products.compactMap(ProductViewModel.init)
         return ProductListViewModel(products: productsViewModel)
     }

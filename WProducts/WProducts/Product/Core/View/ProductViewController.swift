@@ -6,15 +6,30 @@ class ProductViewController: UIViewController {
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     var presenter: ProductPresenter?
+    
+    private var viewModelBuilder = ProductListViewModelBuilder()
+    
     var viewModel: ProductListViewModel?
     var product: ProductViewModel?
+    var indexPath: IndexPath?
+    var isViewDidLayoutCallFirstTime:Bool = true
     
     fileprivate var hasMoreData = true
-
+    
     convenience init(withProduct product: ProductViewModel) {
         self.init(nibName: nil, bundle: nil)
         self.product = product
-        //self.viewModel = [self.product]
+        guard let products = ProductsManager.shared.fetchProducts() else{ return }
+        let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
+        self.viewModel = viewModel
+        
+        
+        guard let indexPath = products.firstIndex(where: {
+            $0.id == product.id
+        }).flatMap({
+            IndexPath(row: $0, section: 0)
+        }) else { return }
+        self.indexPath = indexPath
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -23,6 +38,18 @@ class ProductViewController: UIViewController {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        guard self.isViewDidLayoutCallFirstTime else { return }
+        self.collectionView.collectionViewLayout.collectionViewContentSize // It will required to re calculate collectionViewContentSize in internal method
+
+        DispatchQueue.main.async {
+            guard let indexPath = self.indexPath else{ return }
+            self.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+            self.isViewDidLayoutCallFirstTime = false
+        }
     }
     
     override func viewDidLoad() {
@@ -44,6 +71,7 @@ class ProductViewController: UIViewController {
         collectionView.backgroundColor = UIColor.systemBackground
         collectionView.isPagingEnabled = true
         collectionView.registerNib(ProductDetailCollectionViewCell.self)
+        collectionView.scrollsToTop = true
     }
     
     fileprivate func configureLayout() {
@@ -71,10 +99,6 @@ extension ProductViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableCell(withReuseIdentifier: ProductDetailCollectionViewCell.cellIdentifier(), for: indexPath)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -84,6 +108,7 @@ extension ProductViewController: UICollectionViewDelegate {
         guard let cell = cell as? ProductDetailCollectionViewCell, let product = viewModel?.products[indexPath.row] else { return }
         cell.productDetail = product
         cell.configureCell()
+        cell.detailScrollView.scrollsToTop = true
     }
     
     // MARK: - UIScrollViewDelegate
@@ -106,14 +131,12 @@ extension ProductViewController: UICollectionViewDelegateFlowLayout{
         
         let safeWidth = view.safeAreaLayoutGuide.layoutFrame.size.width
         var width = safeWidth
-        
         if  safeWidth == 0 {
             width = view.frame.size.width
         }
         
         let safeHeight = view.safeAreaLayoutGuide.layoutFrame.size.height
         var height = safeHeight
-        
         if  safeHeight == 0 {
             height = view.frame.size.width
         }

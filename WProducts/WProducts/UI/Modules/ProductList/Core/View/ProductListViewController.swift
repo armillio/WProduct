@@ -10,20 +10,12 @@ class ProductListViewController: UIViewController {
     var viewModel: ProductListViewModel?
     
     fileprivate var hasMoreData = true
-    
+
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
         return refreshControl
     }()
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +24,7 @@ class ProductListViewController: UIViewController {
         configureCollectionView()
         configureLayout()
         presenter?.loadData(fromRefresh: true)
+        SplitViewCoordinator.shared.invokeSetDelegate()
     }
     
     fileprivate func configureNavigationBar() {

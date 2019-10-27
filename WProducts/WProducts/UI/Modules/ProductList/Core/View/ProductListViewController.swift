@@ -40,6 +40,7 @@ class ProductListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         registerNibs()
+        tableView.addSubview(refreshControl)
     }
     
     fileprivate func registerNibs() {

@@ -109,6 +109,7 @@ extension ProductViewController: UICollectionViewDelegate {
         cell.productDetail = product
         cell.configureCell()
         cell.detailScrollView.scrollsToTop = true
+        cell.detailScrollView.contentOffset = CGPoint.init(x: 0, y: 0)
     }
     
     // MARK: - UIScrollViewDelegate

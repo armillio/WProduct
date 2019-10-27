@@ -13,29 +13,23 @@ extension Container {
         guard let window = window() else { return nil }
         return window
     }
-
+    
     func window() -> UIWindow? {
         let window = UIWindow(frame: self.screen().bounds)
-            guard let rootVC = createMainRootViewController() else { return nil }
-            window.rootViewController = rootVC
-            return window
+        guard let rootVC = createMainRootViewController() else { return nil }
+        window.rootViewController = rootVC
+        return window
     }
-
+    
     func screen() -> UIScreen {
         return UIScreen.main
     }
     
     func createMainRootViewController() -> UISplitViewController? {
         guard let splitViewController = splitBuilder().buildSplitModule() else {
-            assert(false, "Root Module failed to build. Check your DI setup.")
+            assert(false, "Split Module failed to build. Check your setup.")
             return nil
         }
-        
-        /*guard let productListViewController = productListBuilder().buildProductListModule() else {
-            assert(false, "Root Module failed to build. Check your DI setup.")
-            return nil
-        }*/
-        //let productsViewController = BaseNavigationController(rootViewController: splitViewController)
         return splitViewController
     }
 }

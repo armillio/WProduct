@@ -47,14 +47,6 @@ class SplitViewController: UISplitViewController {
     }
 }
 
-// MARK: - SplitViewCoordinatorDelegate
-
-extension SplitViewController: SplitViewCoordinatorDelegate {
-    func setDelegate() {
-        self.delegate = self
-    }
-}
-
 // MARK: - UISplitViewControllerDelegate
 
 extension SplitViewController: UISplitViewControllerDelegate {    

@@ -55,7 +55,7 @@ extension SplitViewController: UISplitViewControllerDelegate {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
         guard let topAsDetailController = secondaryAsNavController.topViewController as? ProductViewController else { return false }
         
-        if topAsDetailController.product == nil {
+        if topAsDetailController.viewModel == nil {
             // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
             return true
         }

@@ -51,8 +51,7 @@ class ProductListDefaultPresenter: ProductListPresenter {
                 if let products = products {
                     let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
                     self.viewModel = viewModel
-                    guard let _viewModel = self.viewModel else { return }
-                    self.view?.displayPaginatedList(withViewModel: _viewModel)
+                    self.view?.displayPaginatedList(withViewModel: viewModel)
                     self.nextPageIsLoading = false
                 } else {
                     self.view?.updateNoMoreData()
@@ -63,7 +62,6 @@ class ProductListDefaultPresenter: ProductListPresenter {
     }
     
     func showProductDetail(withProduct product: ProductViewModel){
-        ProductListCoordinator.shared.invokeGetCurrentPage(withPage: self.currentPage)
         router.navigateToProductDetail(withProduct: product)
     }
 }

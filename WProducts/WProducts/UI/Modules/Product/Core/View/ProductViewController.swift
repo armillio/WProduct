@@ -7,54 +7,20 @@ class ProductViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var presenter: ProductPresenter?
-    
-    private var viewModelBuilder = ProductListViewModelBuilder()
-    
     var viewModel: ProductListViewModel?
-    var product: ProductViewModel?
-    var indexPath: IndexPath?
-    var isViewDidLayoutCallFirstTime:Bool = true
     
     private var hasMoreData = true
-    
-    convenience init(_ product: ProductViewModel? = nil) {
-        self.init(nibName: nil, bundle: nil)
-        self.product = product
-        guard let products = ProductsManager.shared.fetchProducts() else{
-            self.displayEmptyScreen(withText: "Select a product from the list")
-            return }
-        let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
-        self.viewModel = viewModel
-        
-        guard let indexPath = products.firstIndex(where: {
-            $0.id == product?.id
-        }).flatMap({
-            IndexPath(row: $0, section: 0)
-        }) else { return }
-        self.indexPath = indexPath
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
+    private var indexPath: IndexPath?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
+        loadData()
         configureCollectionView()
         configureLayout()
         selectedProduct()
     }
     
     // MARK: - Configuration
-    
-    private func configureNavigationBar() {
-        navigationItem.title = self.product?.name
-    }
     
     private func configureCollectionView() {
         collectionView.delegate = self
@@ -75,10 +41,13 @@ class ProductViewController: UIViewController {
     
     // MARK: - Actions
     
+    func loadData() {
+        presenter?.loadData()
+    }
+    
     func selectedProduct(){
         DispatchQueue.main.async {
-            guard let indexPath = self.indexPath else{ return }
-            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+            self.collectionView.scrollToItem(at: self.indexPath ?? IndexPath.init(row: 0, section: 0), at: .centeredHorizontally, animated: false)
         }
     }
 }
@@ -90,13 +59,21 @@ extension ProductViewController: ProductView {
         activityIndicator.startAnimating()
     }
     
+    func displayProduct(withViewModel viewModel: ProductListViewModel, withIndexPath indexPath: IndexPath) {
+        if self.activityIndicator.isAnimating {
+            self.activityIndicator.stopAnimating()
+        }
+        self.viewModel = viewModel
+        self.indexPath = indexPath
+        self.collectionView.reloadData()
+    }
+    
     func displayPaginatedList(withViewModel viewModel: ProductListViewModel) {
         DispatchQueue.main.async {
             if self.activityIndicator.isAnimating {
                 self.activityIndicator.stopAnimating()
             }
             self.viewModel = viewModel
-            // MARK: - check if position doesn't move
             self.collectionView.reloadData()
         }
     }
@@ -151,7 +128,7 @@ extension ProductViewController: UICollectionViewDelegate {
     }
     
     // MARK: - UIScrollViewDelegate
-        
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.manageInfiniteScroll(forScroll: scrollView)
     }

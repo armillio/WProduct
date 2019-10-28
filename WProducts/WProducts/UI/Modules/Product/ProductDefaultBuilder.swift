@@ -9,17 +9,17 @@ class ProductDefaultBuilder: ProductBuilder {
 
     // MARK: - ProductBuilder protocol
     func buildProductModule(_ product: ProductViewModel? = nil) -> UIViewController? {
-        buildView(product)
+        buildView()
         buildRouter()
-        buildInteractor()
+        buildInteractor(product)
         buildPresenter()
         buildCircularDependencies()
         return view as? UIViewController
     }
 
     // MARK: - Private
-    private func buildView(_ product: ProductViewModel?) {
-        view = ProductViewController(product)
+    private func buildView() {
+        view = ProductViewController()
     }
 
     private func buildRouter() {
@@ -30,8 +30,8 @@ class ProductDefaultBuilder: ProductBuilder {
         router = ProductDefaultRouter(viewController: view)
     }
 
-    private func buildInteractor() {
-        interactorManager = ProductDefaultInteractorManager()
+    private func buildInteractor(_ product: ProductViewModel?) {
+        interactorManager = ProductDefaultInteractorManager(product)
     }
 
     private func buildPresenter() {

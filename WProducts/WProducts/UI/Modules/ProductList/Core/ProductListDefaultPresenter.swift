@@ -30,17 +30,16 @@ class ProductListDefaultPresenter: ProductListPresenter {
             self.view?.displayActivityIndicator()
         }
         interactorManager.getProductListData(withPage: 1, pageSize: 20) { (products, error) in
-            self.view?.displayEmptyScreen(withText: "ERROR synchronizing with server")
-//            if error != nil {
-//                self.view?.displayEmptyScreen(withText: "ERROR synchronizing with server")
-//            } else {
-//                self.currentPage = 1
-//                if let products = products {
-//                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
-//                    self.viewModel = viewModel
-//                    self.view?.displayProductList(viewModel)
-//                }
-//            }
+            if error != nil {
+                self.view?.displayEmptyScreen(withText: "ERROR synchronizing with server")
+            } else {
+                self.currentPage = 1
+                if let products = products {
+                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
+                    self.viewModel = viewModel
+                    self.view?.displayProductList(viewModel)
+                }
+            }
         }
     }
     

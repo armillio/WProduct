@@ -31,7 +31,7 @@ class ProductListDefaultPresenter: ProductListPresenter {
         }
         interactorManager.getProductListData(withPage: 1, pageSize: 20) { (products, error) in
             if error != nil {
-                //self.view?.displayEmptyScreen(withText: "ERROR synchronizing with server")
+                self.view?.displayEmptyScreen(withText: "ERROR synchronizing with server")
             } else {
                 self.currentPage = 1
                 if let products = products {
@@ -39,7 +39,6 @@ class ProductListDefaultPresenter: ProductListPresenter {
                     let viewModel = self.viewModelBuilder.buildViewModel(withProducts: ProductsManager.shared.fetchProducts() ?? products)
                     self.viewModel = viewModel
                     self.view?.displayProductList(viewModel)
-                    print("Products fetched from server")
                 }
             }
         }

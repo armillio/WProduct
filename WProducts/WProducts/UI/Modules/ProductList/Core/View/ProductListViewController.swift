@@ -11,7 +11,7 @@ class ProductListViewController: UIViewController {
     private var hasMoreData = true
     
     lazy var productTableViewCell = ProductTableViewCell()
-
+    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
@@ -89,6 +89,24 @@ extension ProductListViewController: ProductListView {
             self.refreshControl.endRefreshing()
             self.activityIndicator.stopAnimating()
         }
+    }
+    
+    func displayEmptyScreen(withText text: String) {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.viewModel = nil
+            self.showEmptyMessage(withText: text)
+        }
+    }
+    
+    private func showEmptyMessage(withText text: String) {
+        let contentView = UIView(frame: CGRect(x: 0, y: 55.0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+        let noResultLabel = UILabel(frame: CGRect(x: 0, y: 55.0, width: tableView.bounds.size.width - 32, height: 60))
+        noResultLabel.text = text
+        noResultLabel.textColor = UIColor.darkGray
+        noResultLabel.textAlignment = .center
+        contentView.addSubview(noResultLabel)
+        tableView.backgroundView = contentView
     }
 }
 

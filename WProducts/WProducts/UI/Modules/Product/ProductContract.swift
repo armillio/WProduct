@@ -17,6 +17,7 @@ protocol ProductView: class {
     func displayActivityIndicator()
     func displayPaginatedList(withViewModel viewModel: ProductListViewModel)
     func updateNoMoreData()
+    func displayEmptyScreen(withText text: String)
 }
 
 protocol ProductRouter {

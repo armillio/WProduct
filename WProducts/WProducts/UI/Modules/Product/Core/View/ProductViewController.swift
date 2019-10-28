@@ -20,7 +20,9 @@ class ProductViewController: UIViewController {
     convenience init(_ product: ProductViewModel? = nil) {
         self.init(nibName: nil, bundle: nil)
         self.product = product
-        guard let products = ProductsManager.shared.fetchProducts() else{ return }
+        guard let products = ProductsManager.shared.fetchProducts() else{
+            self.displayEmptyScreen(withText: "Select a product from the list")
+            return }
         let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
         self.viewModel = viewModel
         
@@ -104,6 +106,24 @@ extension ProductViewController: ProductView {
             self.hasMoreData = false
             self.activityIndicator.stopAnimating()
         }
+    }
+    
+    func displayEmptyScreen(withText text: String) {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.viewModel = nil
+            self.showEmptyMessage(withText: text)
+        }
+    }
+    
+    private func showEmptyMessage(withText text: String) {
+        let contentView = UIView(frame: CGRect(x: 0, y: 55.0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
+        let noResultLabel = UILabel(frame: CGRect(x: 0, y: 55.0, width: collectionView.bounds.size.width, height: 60))
+        noResultLabel.text = text
+        noResultLabel.textColor = UIColor.darkGray
+        noResultLabel.textAlignment = .center
+        contentView.addSubview(noResultLabel)
+        collectionView.backgroundView = contentView
     }
 }
 

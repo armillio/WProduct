@@ -6,15 +6,17 @@ protocol ProductBuilder {
 }
 
 protocol ProductInteractorManager {
-
+    func getProductListData(withPage page: Int, pageSize: Int, completion: @escaping (_ response: [Product]?, _ error: Error?) -> Void)
 }
 
 protocol ProductPresenter {
-
+    func loadNextPage()
 }
 
 protocol ProductView: class {
-
+    func displayActivityIndicator()
+    func displayPaginatedList(withViewModel viewModel: ProductListViewModel)
+    func updateNoMoreData()
 }
 
 protocol ProductRouter {

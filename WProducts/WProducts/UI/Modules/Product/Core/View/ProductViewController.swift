@@ -4,6 +4,7 @@ import UIKit
 class ProductViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var presenter: ProductPresenter?
     
@@ -22,7 +23,6 @@ class ProductViewController: UIViewController {
         guard let products = ProductsManager.shared.fetchProducts() else{ return }
         let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
         self.viewModel = viewModel
-        
         
         guard let indexPath = products.firstIndex(where: {
             $0.id == product?.id
@@ -84,7 +84,27 @@ class ProductViewController: UIViewController {
 // MARK: - ProductView
 
 extension ProductViewController: ProductView {
+    func displayActivityIndicator() {
+        activityIndicator.startAnimating()
+    }
     
+    func displayPaginatedList(withViewModel viewModel: ProductListViewModel) {
+        DispatchQueue.main.async {
+            if self.activityIndicator.isAnimating {
+                self.activityIndicator.stopAnimating()
+            }
+            self.viewModel = viewModel
+            // MARK: - check if position doesn't move
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func updateNoMoreData() {
+        DispatchQueue.main.async {
+            self.hasMoreData = false
+            self.activityIndicator.stopAnimating()
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -111,13 +131,15 @@ extension ProductViewController: UICollectionViewDelegate {
     }
     
     // MARK: - UIScrollViewDelegate
-    
+        
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.manageInfiniteScroll(forScroll: scrollView)
     }
     
     fileprivate func manageInfiniteScroll(forScroll scrollView: UIScrollView) {
-        
+        if self.scrollViewDidDragLeftFromSide(collectionView) && self.hasMoreData {
+            self.presenter?.loadNextPage()
+        }
     }
 }
 

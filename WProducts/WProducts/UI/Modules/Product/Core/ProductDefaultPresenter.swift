@@ -27,7 +27,7 @@ struct ProductViewModel {
     let reviewCount: Int?
     let inStock: Bool
     let page: Int
-
+    
     init(product: Product) {
         self.id = product.id
         self.name = product.name
@@ -48,21 +48,49 @@ class ProductDefaultPresenter: ProductPresenter {
     private let router: ProductRouter
     private weak var view: ProductView?
     
-    private let viewModelBuilder = ProductViewModelBuilder()
+    private let viewModelBuilder = ProductListViewModelBuilder()
+    fileprivate var viewModel: ProductListViewModel?
+    
+    fileprivate var currentPage = 1
+    fileprivate var nextPageIsLoading = false
     
     init(interactorManager: ProductInteractorManager, router: ProductRouter, view: ProductView) {
         self.interactorManager = interactorManager
         self.router = router
         self.view = view
+        ProductListCoordinator.shared.addDelegate(self)
+    }
+    
+    deinit {
+        ProductListCoordinator.shared.removeDelegate(self)
     }
     
     // MARK: - ProductPresenter
     
+    func loadNextPage() {
+        if !self.nextPageIsLoading {
+            self.nextPageIsLoading = true
+            
+            self.currentPage += 1
+            interactorManager.getProductListData(withPage: self.currentPage, pageSize: 30) { (products, error) in
+                if let products = products {
+                    ProductsManager.shared.addProducts(products: products)
+                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: ProductsManager.shared.fetchProducts() ?? products)
+                    self.viewModel = viewModel
+                    guard let _viewModel = self.viewModel else { return }
+                    self.view?.displayPaginatedList(withViewModel: _viewModel)
+                    self.nextPageIsLoading = false
+                } else {
+                    self.view?.updateNoMoreData()
+                    self.nextPageIsLoading = false
+                }
+            }
+        }
+    }
 }
 
-// MARK: - Model Builder
-class ProductViewModelBuilder {
-    func buildViewModel(withProduct product: Product) -> ProductViewModel {
-        return ProductViewModel(product: product)
+extension ProductDefaultPresenter: ProductListCoordinatorDelegate{
+    func getCurrentPage(withPage currentPage: Int) {
+        self.currentPage = currentPage
     }
 }

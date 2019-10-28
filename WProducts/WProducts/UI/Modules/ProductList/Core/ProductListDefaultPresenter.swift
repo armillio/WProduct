@@ -12,10 +12,10 @@ class ProductListDefaultPresenter: ProductListPresenter {
     private weak var view: ProductListView?
     
     private var viewModelBuilder = ProductListViewModelBuilder()
-    fileprivate var viewModel: ProductListViewModel?
+    private var viewModel: ProductListViewModel?
     
     var currentPage = 1
-    fileprivate var nextPageIsLoading = false
+    private var nextPageIsLoading = false
     
     init(interactorManager: ProductListInteractorManager, router: ProductListRouter, view: ProductListView) {
         self.interactorManager = interactorManager

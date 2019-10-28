@@ -15,7 +15,7 @@ class ProductViewController: UIViewController {
     var indexPath: IndexPath?
     var isViewDidLayoutCallFirstTime:Bool = true
     
-    fileprivate var hasMoreData = true
+    private var hasMoreData = true
     
     convenience init(_ product: ProductViewModel? = nil) {
         self.init(nibName: nil, bundle: nil)
@@ -50,11 +50,11 @@ class ProductViewController: UIViewController {
     
     // MARK: - Configuration
     
-    fileprivate func configureNavigationBar() {
+    private func configureNavigationBar() {
         navigationItem.title = self.product?.name
     }
     
-    fileprivate func configureCollectionView() {
+    private func configureCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.systemBackground
@@ -63,7 +63,7 @@ class ProductViewController: UIViewController {
         collectionView.scrollsToTop = true
     }
     
-    fileprivate func configureLayout() {
+    private func configureLayout() {
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = 0
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -136,7 +136,7 @@ extension ProductViewController: UICollectionViewDelegate {
         self.manageInfiniteScroll(forScroll: scrollView)
     }
     
-    fileprivate func manageInfiniteScroll(forScroll scrollView: UIScrollView) {
+    private func manageInfiniteScroll(forScroll scrollView: UIScrollView) {
         if self.scrollViewDidDragLeftFromSide(collectionView) && self.hasMoreData {
             self.presenter?.loadNextPage()
         }

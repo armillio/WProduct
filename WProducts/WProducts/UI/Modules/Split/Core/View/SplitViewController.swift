@@ -38,11 +38,11 @@ class SplitViewController: UISplitViewController {
     
     // MARK: - Model Builder
     
-    fileprivate func productBuilder() -> ProductBuilder {
+    private func productBuilder() -> ProductBuilder {
         return Container.shared.productBuilder()
     }
     
-    fileprivate func productListBuilder() -> ProductListBuilder {
+    private func productListBuilder() -> ProductListBuilder {
         return Container.shared.productListBuilder()
     }
 }

@@ -8,7 +8,7 @@ class ProductListViewController: UIViewController {
     var presenter: ProductListPresenter?
     var viewModel: ProductListViewModel?
     
-    fileprivate var hasMoreData = true
+    private var hasMoreData = true
     
     lazy var productTableViewCell = ProductTableViewCell()
 
@@ -32,7 +32,7 @@ class ProductListViewController: UIViewController {
         tableView.reloadData()
     }
     
-    fileprivate func configureNavigationBar() {
+    private func configureNavigationBar() {
         navigationItem.title = "PRODUCTS"
     }
     
@@ -42,14 +42,14 @@ class ProductListViewController: UIViewController {
     
     // MARK: - Configuration
     
-    fileprivate func configureTableView() {
+    private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         registerNibs()
         tableView.addSubview(refreshControl)
     }
     
-    fileprivate func registerNibs() {
+    private func registerNibs() {
         tableView.registerNib(ProductTableViewCell.self)
     }
 }
@@ -128,7 +128,7 @@ extension ProductListViewController: UITableViewDelegate {
         self.manageInfiniteScroll(forScroll: scrollView)
     }
     
-    fileprivate func manageInfiniteScroll(forScroll scrollView: UIScrollView) {
+    private func manageInfiniteScroll(forScroll scrollView: UIScrollView) {
         if self.scrollViewDidDragDownFromBottom(tableView) && self.hasMoreData {
             self.presenter?.loadNextPage()
         }

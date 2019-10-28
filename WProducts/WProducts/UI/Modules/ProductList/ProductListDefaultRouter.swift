@@ -18,7 +18,7 @@ class ProductListDefaultRouter: ProductListRouter {
         }
     }
     
-    fileprivate func productBuilder() -> ProductBuilder {
+    private func productBuilder() -> ProductBuilder {
         return Container.shared.productBuilder()
     }
 }

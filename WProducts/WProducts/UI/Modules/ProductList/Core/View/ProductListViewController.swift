@@ -100,12 +100,37 @@ extension ProductListViewController: ProductListView {
     }
     
     private func showEmptyMessage(withText text: String) {
-        let contentView = UIView(frame: CGRect(x: 0, y: 55.0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-        let noResultLabel = UILabel(frame: CGRect(x: 0, y: 55.0, width: tableView.bounds.size.width - 32, height: 60))
+        let contentView = UIView(frame: CGRect(x: tableView.bounds.origin.x, y: tableView.bounds.origin.y, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+        
+        let blankImage = UIImage.init(named: "offline")
+        let detailImageView = UIImageView.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        detailImageView.image = blankImage
+        detailImageView.contentMode = .scaleAspectFit
+        detailImageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(detailImageView)
+
+        let noResultLabel = UILabel(frame: CGRect(x: 0, y: 0, width: contentView.frame.size.width - 32, height: 60))
         noResultLabel.text = text
+        noResultLabel.adjustHeightOfLabel()
         noResultLabel.textColor = UIColor.darkGray
         noResultLabel.textAlignment = .center
+        noResultLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(noResultLabel)
+        
+        let widthConstraint = NSLayoutConstraint(item: detailImageView, attribute: .width, relatedBy: .equal,
+                                                 toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 100)
+        let heightConstraint = NSLayoutConstraint(item: detailImageView, attribute: .height, relatedBy: .equal,
+                                                  toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 100)
+        let xConstraint = NSLayoutConstraint(item: detailImageView, attribute: .centerX, relatedBy: .equal, toItem: contentView, attribute: .centerX, multiplier: 1, constant: 0)
+        let yConstraint = NSLayoutConstraint(item: detailImageView, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: -(noResultLabel.frame.height * 3))
+
+        let widthLabelConstraint = NSLayoutConstraint(item: noResultLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: contentView.frame.size.width - 32)
+        let heightLabelConstraint = NSLayoutConstraint(item: noResultLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: noResultLabel.frame.size.height)
+        let xLabelConstraint = NSLayoutConstraint(item: noResultLabel, attribute: .centerX, relatedBy: .equal, toItem: contentView, attribute: .centerX, multiplier: 1, constant: 0)
+        let yLabelConstraint = NSLayoutConstraint(item: noResultLabel, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0)
+        
+        NSLayoutConstraint.activate([widthConstraint, heightConstraint, xConstraint, yConstraint, widthLabelConstraint, heightLabelConstraint, xLabelConstraint, yLabelConstraint])
+        tableView.separatorStyle = .none
         tableView.backgroundView = contentView
     }
 }

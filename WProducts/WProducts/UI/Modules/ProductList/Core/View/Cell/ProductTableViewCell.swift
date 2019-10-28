@@ -32,7 +32,7 @@ class ProductTableViewCell: UITableViewCell, UITableViewCellStaticProtocol {
             calculatedHeight = 116
         }
         
-        return calculatedHeight  + 16.0
+        return calculatedHeight  + 16.0 + 1
     }
     
     func configureCell(withProduct product: ProductViewModel){

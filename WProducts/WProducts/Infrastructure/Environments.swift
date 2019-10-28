@@ -26,22 +26,4 @@ enum Environment {
     var version: String {
         return "2019.1"
     }
-
-    var publicKey: String {
-        switch self {
-        case .development:
-            return ""
-        case .production:
-            return ""
-        }
-    }
-
-    var secretKey: String {
-        switch self {
-        case .development:
-            return ""
-        case .production:
-            return ""
-        }
-    }
 }

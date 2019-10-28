@@ -7,54 +7,32 @@ class ProductViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var presenter: ProductPresenter?
-    
-    private var viewModelBuilder = ProductListViewModelBuilder()
-    
     var viewModel: ProductListViewModel?
-    var product: ProductViewModel?
-    var indexPath: IndexPath?
-    var isViewDidLayoutCallFirstTime:Bool = true
     
-    fileprivate var hasMoreData = true
-    
-    convenience init(_ product: ProductViewModel? = nil) {
-        self.init(nibName: nil, bundle: nil)
-        self.product = product
-        guard let products = ProductsManager.shared.fetchProducts() else{ return }
-        let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
-        self.viewModel = viewModel
-        
-        guard let indexPath = products.firstIndex(where: {
-            $0.id == product?.id
-        }).flatMap({
-            IndexPath(row: $0, section: 0)
-        }) else { return }
-        self.indexPath = indexPath
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
+    private var hasMoreData = true
+    private var indexPath: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
+        loadData()
         configureCollectionView()
         configureLayout()
         selectedProduct()
     }
     
-    // MARK: - Configuration
-    
-    fileprivate func configureNavigationBar() {
-        navigationItem.title = self.product?.name
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        
+        flowLayout.invalidateLayout()
     }
     
-    fileprivate func configureCollectionView() {
+    // MARK: - Configuration
+    
+    private func configureCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.systemBackground
@@ -63,7 +41,7 @@ class ProductViewController: UIViewController {
         collectionView.scrollsToTop = true
     }
     
-    fileprivate func configureLayout() {
+    private func configureLayout() {
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = 0
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -73,10 +51,15 @@ class ProductViewController: UIViewController {
     
     // MARK: - Actions
     
+    func loadData() {
+        presenter?.loadData()
+    }
+    
     func selectedProduct(){
         DispatchQueue.main.async {
-            guard let indexPath = self.indexPath else{ return }
-            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+            if (self.indexPath != nil) {
+                self.collectionView.scrollToItem(at: self.indexPath ?? IndexPath.init(row: 0, section: 0), at: .centeredHorizontally, animated: false)
+            }
         }
     }
 }
@@ -88,13 +71,21 @@ extension ProductViewController: ProductView {
         activityIndicator.startAnimating()
     }
     
+    func displayProduct(withViewModel viewModel: ProductListViewModel, withIndexPath indexPath: IndexPath) {
+        if self.activityIndicator.isAnimating {
+            self.activityIndicator.stopAnimating()
+        }
+        self.viewModel = viewModel
+        self.indexPath = indexPath
+        self.collectionView.reloadData()
+    }
+    
     func displayPaginatedList(withViewModel viewModel: ProductListViewModel) {
         DispatchQueue.main.async {
             if self.activityIndicator.isAnimating {
                 self.activityIndicator.stopAnimating()
             }
             self.viewModel = viewModel
-            // MARK: - check if position doesn't move
             self.collectionView.reloadData()
         }
     }
@@ -104,6 +95,24 @@ extension ProductViewController: ProductView {
             self.hasMoreData = false
             self.activityIndicator.stopAnimating()
         }
+    }
+    
+    func displayEmptyScreen(withText text: String) {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.viewModel = nil
+            self.showEmptyMessage(withText: text)
+        }
+    }
+    
+    private func showEmptyMessage(withText text: String) {
+        let contentView = UIView(frame: CGRect(x: 0, y: 55.0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
+        let noResultLabel = UILabel(frame: CGRect(x: 0, y: 55.0, width: collectionView.bounds.size.width, height: 60))
+        noResultLabel.text = text
+        noResultLabel.textColor = UIColor.darkGray
+        noResultLabel.textAlignment = .center
+        contentView.addSubview(noResultLabel)
+        collectionView.backgroundView = contentView
     }
 }
 
@@ -131,12 +140,12 @@ extension ProductViewController: UICollectionViewDelegate {
     }
     
     // MARK: - UIScrollViewDelegate
-        
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.manageInfiniteScroll(forScroll: scrollView)
     }
     
-    fileprivate func manageInfiniteScroll(forScroll scrollView: UIScrollView) {
+    private func manageInfiniteScroll(forScroll scrollView: UIScrollView) {
         if self.scrollViewDidDragLeftFromSide(collectionView) && self.hasMoreData {
             self.presenter?.loadNextPage()
         }

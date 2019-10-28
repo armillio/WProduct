@@ -1,10 +1,3 @@
-//
-//  SplitDefaultRouter.swift
-//  CurrencyConverter
-//
-//  Created by Armando Carmona on 26/10/2019.
-//  Copyright (c) 2016, Happy Computer. All rights reserved.
-//
 
 import UIKit
 
@@ -15,6 +8,6 @@ class SplitDefaultRouter: SplitRouter {
         self.viewController = viewController
     }
 
-    // MARK - Navigation funcions
+    // MARK - Navigation functions
 
 }

@@ -8,7 +8,7 @@ class ProductListDefaultRouter: ProductListRouter {
         self.viewController = viewController
     }
     
-    // MARK - Navigation funcions
+    // MARK - Navigation functions
     
     func navigateToProductDetail(withProduct product: ProductViewModel) {
         if let productViewController = self.productBuilder().buildProductModule(product){
@@ -18,7 +18,7 @@ class ProductListDefaultRouter: ProductListRouter {
         }
     }
     
-    fileprivate func productBuilder() -> ProductBuilder {
+    private func productBuilder() -> ProductBuilder {
         return Container.shared.productBuilder()
     }
 }

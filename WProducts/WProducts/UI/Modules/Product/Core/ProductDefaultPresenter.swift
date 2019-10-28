@@ -1,21 +1,6 @@
 
 import Foundation
 
-// Model
-
-struct Product:Hashable {
-    let id: String
-    let name: String
-    let shortDescription: String?
-    let longDescription: String?
-    let price: String?
-    let image: String?
-    let reviewRating: Double?
-    let reviewCount: Int?
-    let inStock: Bool
-    let page: Int
-}
-
 struct ProductViewModel {
     let id: String
     let name: String
@@ -26,7 +11,6 @@ struct ProductViewModel {
     let reviewRating: Double?
     let reviewCount: Int?
     let inStock: Bool
-    let page: Int
     
     init(product: Product) {
         self.id = product.id
@@ -38,7 +22,6 @@ struct ProductViewModel {
         self.reviewRating = product.reviewRating
         self.reviewCount = product.reviewCount
         self.inStock = product.inStock
-        self.page = product.page
     }
 }
 
@@ -49,36 +32,47 @@ class ProductDefaultPresenter: ProductPresenter {
     private weak var view: ProductView?
     
     private let viewModelBuilder = ProductListViewModelBuilder()
-    fileprivate var viewModel: ProductListViewModel?
+    private var viewModel: ProductListViewModel?
     
-    fileprivate var currentPage = 1
-    fileprivate var nextPageIsLoading = false
+    private var currentPage = 1
+    private var nextPageIsLoading = false
+    private var product: ProductViewModel? = nil
     
     init(interactorManager: ProductInteractorManager, router: ProductRouter, view: ProductView) {
         self.interactorManager = interactorManager
         self.router = router
         self.view = view
-        ProductListCoordinator.shared.addDelegate(self)
+        CurrentPageCoordinator.shared.addDelegate(self)
     }
     
     deinit {
-        ProductListCoordinator.shared.removeDelegate(self)
+        CurrentPageCoordinator.shared.removeDelegate(self)
     }
     
     // MARK: - ProductPresenter
     
+    func loadData() {
+        let data = interactorManager.getProducts()
+        if data.products != nil {
+            guard let products = data.products else{ return }
+            let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
+            self.viewModel = viewModel
+            guard let indexPath = data.indexPath else{ return }
+            self.view?.displayProduct(withViewModel: viewModel, withIndexPath: indexPath)
+        }else{
+            self.view?.displayEmptyScreen(withText: "Select a product from the list")
+        }
+    }
+    
     func loadNextPage() {
         if !self.nextPageIsLoading {
             self.nextPageIsLoading = true
-            
             self.currentPage += 1
-            interactorManager.getProductListData(withPage: self.currentPage, pageSize: 30) { (products, error) in
+            interactorManager.getProductListData(withPage: self.currentPage, pageSize: 20) { (products, error) in
                 if let products = products {
-                    ProductsManager.shared.addProducts(products: products)
-                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: ProductsManager.shared.fetchProducts() ?? products)
+                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
                     self.viewModel = viewModel
-                    guard let _viewModel = self.viewModel else { return }
-                    self.view?.displayPaginatedList(withViewModel: _viewModel)
+                    self.view?.displayPaginatedList(withViewModel: viewModel)
                     self.nextPageIsLoading = false
                 } else {
                     self.view?.updateNoMoreData()
@@ -89,7 +83,7 @@ class ProductDefaultPresenter: ProductPresenter {
     }
 }
 
-extension ProductDefaultPresenter: ProductListCoordinatorDelegate{
+extension ProductDefaultPresenter: CurrentPageCoordinatorDelegate{
     func getCurrentPage(withPage currentPage: Int) {
         self.currentPage = currentPage
     }

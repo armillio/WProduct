@@ -20,6 +20,7 @@ protocol ProductListView: class {
     func displayProductList(_ viewModel: ProductListViewModel)
     func displayPaginatedList(withViewModel viewModel: ProductListViewModel)
     func updateNoMoreData()
+    func displayEmptyScreen(withText text: String)
 }
 
 protocol ProductListRouter {

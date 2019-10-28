@@ -10,6 +10,4 @@ struct ApplicationConstants {
     #endif
     static let APIBaseURL = endpoint.baseURL
     static let APIVersion = endpoint.version
-    static let APIPublicKey = endpoint.publicKey
-    static let APISecretKey = endpoint.secretKey
 }

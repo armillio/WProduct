@@ -8,6 +8,6 @@ class ProductDefaultRouter: ProductRouter {
         self.viewController = viewController
     }
 
-    // MARK - Navigation funcions
+    // MARK - Navigation functions
 
 }

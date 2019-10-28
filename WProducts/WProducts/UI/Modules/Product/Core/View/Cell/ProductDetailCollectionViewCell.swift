@@ -11,6 +11,7 @@ class ProductDetailCollectionViewCell: UICollectionViewCell, UICollectionViewCel
     @IBOutlet weak var reviewRating: CosmosView!
     @IBOutlet weak var productPrice: UILabel!
     @IBOutlet weak var productLongDescriptionHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var productShortDescriptionHeightConstraint: NSLayoutConstraint!
     
     var productDetail: ProductViewModel?
     
@@ -32,14 +33,19 @@ class ProductDetailCollectionViewCell: UICollectionViewCell, UICollectionViewCel
         
         self.productDescription.attributedText = product.shortDescription?.html
         self.productDescription.adjustHeightOfLabel()
+        var frameShortHeight = self.productDescription.frame.size.height
+        if frameShortHeight < 20 {
+            frameShortHeight = 20
+        }
+        self.productShortDescriptionHeightConstraint.constant = frameShortHeight
         
         self.productLongDescription.attributedText = product.longDescription?.html
         self.productLongDescription.isScrollEnabled = false
         self.productLongDescription.sizeToFit()
-        var frameHeight = self.productLongDescription.frame.size.height
-        if frameHeight < 20 {
-            frameHeight = 20
+        var frameLongHeight = self.productLongDescription.frame.size.height
+        if frameLongHeight < 20 {
+            frameLongHeight = 20
         }
-        self.productLongDescriptionHeightConstraint.constant = frameHeight
+        self.productLongDescriptionHeightConstraint.constant = frameLongHeight
     }
 }

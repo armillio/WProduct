@@ -26,9 +26,14 @@ class ProductDetailCollectionViewCell: UICollectionViewCell, UICollectionViewCel
         self.reviewCount.text = String.init(format: "(%d)", product.reviewCount ?? 0)
         self.productPrice.text = product.price
         self.reviewRating.rating = product.reviewRating ?? 0
-        let url = URL.init(string: String.init(format:"%@%@", ApplicationConstants.APIBaseURL, product.image ?? "/"))
-        if let imageURL = url {
-            self.productImage.download(fromURL: imageURL)
+        let urlString = String.init(format:"%@%@", ApplicationConstants.APIBaseURL, product.image ?? "/")
+        let url = URL.init(string: urlString)
+        if url?.verifyUrl(url: url) ?? false {
+            if let imageURL = url {
+                self.productImage.download(fromURL: imageURL)
+            }
+        }else{
+            self.productImage.image = UIImage.init(named: "no_image")
         }
         
         self.productDescription.attributedText = product.shortDescription?.html

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		471225672367A2D8001DDE80 /* URL+Extended.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471225662367A2D8001DDE80 /* URL+Extended.swift */; };
 		4730E4552364D490008C8873 /* ProductsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4730E4542364D490008C8873 /* ProductsManager.swift */; };
 		4730E4592364F5C3008C8873 /* ProductDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4730E4572364F5C3008C8873 /* ProductDetailCollectionViewCell.swift */; };
 		4730E45A2364F5C3008C8873 /* ProductDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4730E4582364F5C3008C8873 /* ProductDetailCollectionViewCell.xib */; };
@@ -56,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		471225662367A2D8001DDE80 /* URL+Extended.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extended.swift"; sourceTree = "<group>"; };
 		4730E4542364D490008C8873 /* ProductsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsManager.swift; sourceTree = "<group>"; };
 		4730E4572364F5C3008C8873 /* ProductDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		4730E4582364F5C3008C8873 /* ProductDetailCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				47A8762A2363D3FF0095F709 /* UIScrollViewDelegate+DragDownFromBottom.swift */,
 				4730E45B2364F93F008C8873 /* String+Extended.swift */,
 				476CCCF023664FA700A4539B /* UITableView+RegisterNib.swift */,
+				471225662367A2D8001DDE80 /* URL+Extended.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				477E0AB6236344730003AE52 /* UICollectionView+RegisterNib.swift in Sources */,
+				471225672367A2D8001DDE80 /* URL+Extended.swift in Sources */,
 				47A5BF4D23661C1900B2564D /* SplitContract.swift in Sources */,
 				4730E47A23654FE4008C8873 /* ProductTableViewCell.swift in Sources */,
 				47576956236269AE005801D1 /* Container+Builders.swift in Sources */,

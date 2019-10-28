@@ -8,7 +8,7 @@ class ProductTableViewCell: UITableViewCell, UITableViewCellStaticProtocol {
     @IBOutlet weak var reviewCount: UILabel!
     @IBOutlet weak var reviewRating: CosmosView!
     @IBOutlet weak var productPrice: UILabel!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -16,7 +16,7 @@ class ProductTableViewCell: UITableViewCell, UITableViewCellStaticProtocol {
     func cellHeight(withProduct product: ProductViewModel?, withContentViewWidth contentWidth: CGFloat?) -> CGFloat? {
         guard let viewWidth = contentWidth else { return 0.0 }
         let contentViewWidth = viewWidth - (100.0 + 16.0 + 8.0 + 16.0)
-        	
+        
         let label = UILabel.init()
         
         let productName = label.determineLabelHeight(withWidth: contentViewWidth, withFont: UIFont.preferredFont(forTextStyle: .footnote), withText: product?.name)
@@ -31,7 +31,6 @@ class ProductTableViewCell: UITableViewCell, UITableViewCellStaticProtocol {
         if calculatedHeight < (100 + 16) {
             calculatedHeight = 116
         }
-        
         return calculatedHeight  + 16.0 + 1
     }
     
@@ -41,9 +40,14 @@ class ProductTableViewCell: UITableViewCell, UITableViewCellStaticProtocol {
         self.reviewCount.text = String.init(format: "(%d)", product.reviewCount ?? 0)
         self.productPrice.text = product.price
         self.reviewRating.rating = product.reviewRating ?? 0
-        let url = URL.init(string: String.init(format:"%@%@", ApplicationConstants.APIBaseURL, product.image ?? "/"))
-        if let imageURL = url {
-            self.productImage.download(fromURL: imageURL)
+        let urlString = String.init(format:"%@%@ewewe", ApplicationConstants.APIBaseURL, product.image ?? "/")
+        let url = URL.init(string: urlString)
+        if url?.verifyUrl(url: url) ?? false {
+            if let imageURL = url {
+                self.productImage.download(fromURL: imageURL)
+            }
+        }else{
+            self.productImage.image = UIImage.init(named: "no_image")
         }
     }
 }

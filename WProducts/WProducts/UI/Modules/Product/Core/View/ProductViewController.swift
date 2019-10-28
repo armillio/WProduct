@@ -11,7 +11,7 @@ class ProductViewController: UIViewController {
     
     private var hasMoreData = true
     private var indexPath: IndexPath?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
@@ -47,7 +47,9 @@ class ProductViewController: UIViewController {
     
     func selectedProduct(){
         DispatchQueue.main.async {
-            self.collectionView.scrollToItem(at: self.indexPath ?? IndexPath.init(row: 0, section: 0), at: .centeredHorizontally, animated: false)
+            if (self.indexPath != nil) {
+                self.collectionView.scrollToItem(at: self.indexPath ?? IndexPath.init(row: 0, section: 0), at: .centeredHorizontally, animated: false)
+            }
         }
     }
 }

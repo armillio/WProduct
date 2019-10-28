@@ -31,7 +31,7 @@ class SplitDefaultBuilder: SplitBuilder {
     }
 
     private func buildInteractor() {
-        interactorManager = SplitDefaultInteractorManager() // TODO: set dependencies in init (use case/s, services...)
+        interactorManager = SplitDefaultInteractorManager()
     }
 
     private func buildPresenter() {

@@ -31,7 +31,7 @@ class ProductListDefaultBuilder: ProductListBuilder {
     }
 
     private func buildInteractor() {
-        interactorManager = ProductListDefaultInteractorManager() // TODO: set dependencies in init (use case/s, services...)
+        interactorManager = ProductListDefaultInteractorManager()
     }
 
     private func buildPresenter() {

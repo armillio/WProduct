@@ -4,6 +4,7 @@ import UIKit
 class ProductViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var presenter: ProductPresenter?
     
@@ -22,7 +23,6 @@ class ProductViewController: UIViewController {
         guard let products = ProductsManager.shared.fetchProducts() else{ return }
         let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
         self.viewModel = viewModel
-        
         
         guard let indexPath = products.firstIndex(where: {
             $0.id == product?.id
@@ -45,11 +45,7 @@ class ProductViewController: UIViewController {
         configureNavigationBar()
         configureCollectionView()
         configureLayout()
-        
-        DispatchQueue.main.async {
-            guard let indexPath = self.indexPath else{ return }
-            self.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
-        }
+        selectedProduct()
     }
     
     // MARK: - Configuration
@@ -74,12 +70,41 @@ class ProductViewController: UIViewController {
         flowLayout.scrollDirection = .horizontal
         collectionView.itemSize(withView: view, withFlowLayout: flowLayout, withCount: viewModel?.products.count ?? 0)
     }
+    
+    // MARK: - Actions
+    
+    func selectedProduct(){
+        DispatchQueue.main.async {
+            guard let indexPath = self.indexPath else{ return }
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        }
+    }
 }
 
 // MARK: - ProductView
 
 extension ProductViewController: ProductView {
+    func displayActivityIndicator() {
+        activityIndicator.startAnimating()
+    }
     
+    func displayPaginatedList(withViewModel viewModel: ProductListViewModel) {
+        DispatchQueue.main.async {
+            if self.activityIndicator.isAnimating {
+                self.activityIndicator.stopAnimating()
+            }
+            self.viewModel = viewModel
+            // MARK: - check if position doesn't move
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func updateNoMoreData() {
+        DispatchQueue.main.async {
+            self.hasMoreData = false
+            self.activityIndicator.stopAnimating()
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -106,13 +131,15 @@ extension ProductViewController: UICollectionViewDelegate {
     }
     
     // MARK: - UIScrollViewDelegate
-    
+        
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.manageInfiniteScroll(forScroll: scrollView)
     }
     
     fileprivate func manageInfiniteScroll(forScroll scrollView: UIScrollView) {
-        
+        if self.scrollViewDidDragLeftFromSide(collectionView) && self.hasMoreData {
+            self.presenter?.loadNextPage()
+        }
     }
 }
 
@@ -120,12 +147,6 @@ extension ProductViewController: UICollectionViewDelegate {
 
 extension ProductViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize  {
-        
-        let safeWidth = view.safeAreaLayoutGuide.layoutFrame.size.width
-        var width = safeWidth
-        if  safeWidth == 0 {
-            width = view.frame.size.width
-        }
         
         let safeHeight = view.safeAreaLayoutGuide.layoutFrame.size.height
         var height = safeHeight

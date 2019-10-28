@@ -26,7 +26,7 @@ class SplitDefaultBuilder: SplitBuilder {
 
     // MARK: - Private
     private func buildView() {
-        view = SplitViewController(true)
+        view = SplitViewController()
     }
 
     private func buildRouter() {

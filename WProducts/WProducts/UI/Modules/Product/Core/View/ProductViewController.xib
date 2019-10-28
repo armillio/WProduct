@@ -3,12 +3,14 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductViewController" customModule="WProducts" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="9sd-ag-Fex" id="8ht-KP-nwe"/>
                 <outlet property="collectionView" destination="Ung-1I-Xla" id="p8o-KJ-mOt"/>
                 <outlet property="flowLayout" destination="Hh7-N2-60b" id="5V7-S1-U09"/>
                 <outlet property="view" destination="SDo-vO-Gdl" id="Cal-Vb-TeY"/>
@@ -29,16 +31,28 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="9sd-ag-Fex">
+                    <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
+                    <color key="tintColor" name="green"/>
+                    <color key="color" name="green"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Ung-1I-Xla" firstAttribute="leading" secondItem="LFT-bN-f0h" secondAttribute="leading" id="IEg-kT-BFk"/>
+                <constraint firstItem="9sd-ag-Fex" firstAttribute="centerX" secondItem="LFT-bN-f0h" secondAttribute="centerX" id="KD7-3U-ZpL"/>
                 <constraint firstItem="Ung-1I-Xla" firstAttribute="top" secondItem="LFT-bN-f0h" secondAttribute="top" id="MDm-1r-hIl"/>
                 <constraint firstItem="LFT-bN-f0h" firstAttribute="bottom" secondItem="Ung-1I-Xla" secondAttribute="bottom" id="UDa-kn-PKQ"/>
                 <constraint firstItem="LFT-bN-f0h" firstAttribute="trailing" secondItem="Ung-1I-Xla" secondAttribute="trailing" id="kXQ-EX-VfR"/>
+                <constraint firstItem="9sd-ag-Fex" firstAttribute="centerY" secondItem="LFT-bN-f0h" secondAttribute="centerY" id="kyb-T7-RDO"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="LFT-bN-f0h"/>
             <point key="canvasLocation" x="132" y="154"/>
         </view>
     </objects>
+    <resources>
+        <namedColor name="green">
+            <color red="0.36500000953674316" green="0.59200000762939453" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

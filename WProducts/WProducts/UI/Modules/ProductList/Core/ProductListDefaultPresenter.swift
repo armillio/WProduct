@@ -14,7 +14,7 @@ class ProductListDefaultPresenter: ProductListPresenter {
     private var viewModelBuilder = ProductListViewModelBuilder()
     fileprivate var viewModel: ProductListViewModel?
     
-    fileprivate var currentPage = 1
+    var currentPage = 1
     fileprivate var nextPageIsLoading = false
     
     init(interactorManager: ProductListInteractorManager, router: ProductListRouter, view: ProductListView) {
@@ -36,7 +36,7 @@ class ProductListDefaultPresenter: ProductListPresenter {
                 self.currentPage = 1
                 if let products = products {
                     ProductsManager.shared.addProducts(products: products)
-                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
+                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: ProductsManager.shared.fetchProducts() ?? products)
                     self.viewModel = viewModel
                     self.view?.displayProductList(viewModel)
                     print("Products fetched from server")
@@ -44,7 +44,7 @@ class ProductListDefaultPresenter: ProductListPresenter {
             }
         }
     }
-
+    
     func loadNextPage() {
         if !self.nextPageIsLoading {
             self.nextPageIsLoading = true
@@ -52,8 +52,8 @@ class ProductListDefaultPresenter: ProductListPresenter {
             interactorManager.getProductListData(withPage: self.currentPage, pageSize: 30) { (products, error) in
                 if let products = products {
                     ProductsManager.shared.addProducts(products: products)
-                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
-                    self.viewModel?.products.append(contentsOf: viewModel.products)
+                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: ProductsManager.shared.fetchProducts() ?? products)
+                    self.viewModel = viewModel
                     guard let _viewModel = self.viewModel else { return }
                     self.view?.displayPaginatedList(withViewModel: _viewModel)
                     self.nextPageIsLoading = false
@@ -66,6 +66,7 @@ class ProductListDefaultPresenter: ProductListPresenter {
     }
     
     func showProductDetail(withProduct product: ProductViewModel){
+        ProductListCoordinator.shared.invokeGetCurrentPage(withPage: self.currentPage)
         router.navigateToProductDetail(withProduct: product)
     }
 }

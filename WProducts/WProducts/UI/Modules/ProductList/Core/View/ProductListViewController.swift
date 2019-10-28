@@ -26,6 +26,12 @@ class ProductListViewController: UIViewController {
         presenter?.loadData(fromRefresh: true)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.loadData(fromRefresh: true)
+        tableView.reloadData()
+    }
+    
     fileprivate func configureNavigationBar() {
         navigationItem.title = "PRODUCTS"
     }

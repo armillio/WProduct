@@ -70,12 +70,10 @@ class ProductDefaultPresenter: ProductPresenter {
     func loadNextPage() {
         if !self.nextPageIsLoading {
             self.nextPageIsLoading = true
-            
             self.currentPage += 1
-            interactorManager.getProductListData(withPage: self.currentPage, pageSize: 30) { (products, error) in
+            interactorManager.getProductListData(withPage: self.currentPage, pageSize: 20) { (products, error) in
                 if let products = products {
-                    ProductsManager.shared.addProducts(products: products)
-                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: ProductsManager.shared.fetchProducts() ?? products)
+                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
                     self.viewModel = viewModel
                     guard let _viewModel = self.viewModel else { return }
                     self.view?.displayPaginatedList(withViewModel: _viewModel)

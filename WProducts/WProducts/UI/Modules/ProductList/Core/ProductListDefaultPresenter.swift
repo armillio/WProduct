@@ -35,8 +35,7 @@ class ProductListDefaultPresenter: ProductListPresenter {
             } else {
                 self.currentPage = 1
                 if let products = products {
-                    ProductsManager.shared.addProducts(products: products)
-                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: ProductsManager.shared.fetchProducts() ?? products)
+                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
                     self.viewModel = viewModel
                     self.view?.displayProductList(viewModel)
                 }
@@ -48,10 +47,9 @@ class ProductListDefaultPresenter: ProductListPresenter {
         if !self.nextPageIsLoading {
             self.nextPageIsLoading = true
             self.currentPage += 1
-            interactorManager.getProductListData(withPage: self.currentPage, pageSize: 30) { (products, error) in
+            interactorManager.getProductListData(withPage: self.currentPage, pageSize: 20) { (products, error) in
                 if let products = products {
-                    ProductsManager.shared.addProducts(products: products)
-                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: ProductsManager.shared.fetchProducts() ?? products)
+                    let viewModel = self.viewModelBuilder.buildViewModel(withProducts: products)
                     self.viewModel = viewModel
                     guard let _viewModel = self.viewModel else { return }
                     self.view?.displayPaginatedList(withViewModel: _viewModel)
@@ -71,6 +69,7 @@ class ProductListDefaultPresenter: ProductListPresenter {
 }
 
 // MARK: - Model Builder
+
 class ProductListViewModelBuilder {
     func buildViewModel(withProducts products: [Product]) -> ProductListViewModel {
         let productsViewModel = products.compactMap(ProductViewModel.init)

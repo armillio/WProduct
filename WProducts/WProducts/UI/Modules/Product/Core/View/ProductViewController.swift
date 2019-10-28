@@ -20,6 +20,16 @@ class ProductViewController: UIViewController {
         selectedProduct()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        
+        flowLayout.invalidateLayout()
+    }
+    
     // MARK: - Configuration
     
     private func configureCollectionView() {

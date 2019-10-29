@@ -16,11 +16,16 @@ class ProductsManager {
             replaceProducts(withProducts: products)
             return
         }
+        
         var allProducts = productsArray
         for product in products {
             var inTheCache = false
             for  originalProduct in productsArray{
-                if product.id == originalProduct.id {
+                if product.name == "" || product.id == "" {
+                    inTheCache = true
+                    allProducts.removeAll{$0.id == product.id}
+                    allProducts.removeAll{$0.id == ""}
+                }else if product.id == originalProduct.id {
                     inTheCache = true
                 }
             }

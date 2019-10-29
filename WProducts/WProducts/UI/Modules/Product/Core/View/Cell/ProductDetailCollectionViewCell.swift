@@ -10,6 +10,8 @@ class ProductDetailCollectionViewCell: UICollectionViewCell, UICollectionViewCel
     @IBOutlet weak var reviewCount: UILabel!
     @IBOutlet weak var reviewRating: CosmosView!
     @IBOutlet weak var productPrice: UILabel!
+    @IBOutlet weak var inStock: UIImageView!
+    @IBOutlet weak var inStockLabel: UILabel!
     @IBOutlet weak var productLongDescriptionHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var productShortDescriptionHeightConstraint: NSLayoutConstraint!
     
@@ -26,9 +28,15 @@ class ProductDetailCollectionViewCell: UICollectionViewCell, UICollectionViewCel
         self.reviewCount.text = String.init(format: "(%d)", product.reviewCount ?? 0)
         self.productPrice.text = product.price
         self.reviewRating.rating = product.reviewRating ?? 0
-        let url = URL.init(string: String.init(format:"%@%@", ApplicationConstants.APIBaseURL, product.image ?? "/"))
-        if let imageURL = url {
-            self.productImage.download(fromURL: imageURL)
+        
+        let urlString = String.init(format:"%@%@", ApplicationConstants.APIBaseURL, product.image ?? "/")
+        let url = URL.init(string: urlString)
+        if url?.verifyUrl(url: url) ?? false {
+            if let imageURL = url {
+                self.productImage.download(fromURL: imageURL)
+            }
+        }else{
+            self.productImage.image = UIImage.init(named: "no_image")
         }
         
         self.productDescription.attributedText = product.shortDescription?.html
@@ -47,5 +55,17 @@ class ProductDetailCollectionViewCell: UICollectionViewCell, UICollectionViewCel
             frameLongHeight = 20
         }
         self.productLongDescriptionHeightConstraint.constant = frameLongHeight
+        
+        if product.inStock == false {
+            self.productName.textColor = UIColor.systemGray
+            self.productPrice.textColor = UIColor.systemGray
+            self.inStock.image = UIImage.init(named: "no_stock")
+            self.inStockLabel.text = "No Stock"
+        }else{
+            self.productName.textColor = UIColor.init(named: "lightBlue")
+            self.productPrice.textColor = UIColor.init(named: "lightBlue")
+            self.inStock.image = UIImage.init(named: "stock")
+            self.inStockLabel.text = "In Stock"
+        }
     }
 }

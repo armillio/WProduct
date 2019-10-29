@@ -101,17 +101,28 @@ extension ProductViewController: ProductView {
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
             self.viewModel = nil
-            self.showEmptyMessage(withText: text)
+            self.showEmptyScreen()
         }
     }
     
-    private func showEmptyMessage(withText text: String) {
-        let contentView = UIView(frame: CGRect(x: 0, y: 55.0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
-        let noResultLabel = UILabel(frame: CGRect(x: 0, y: 55.0, width: collectionView.bounds.size.width, height: 60))
-        noResultLabel.text = text
-        noResultLabel.textColor = UIColor.darkGray
-        noResultLabel.textAlignment = .center
-        contentView.addSubview(noResultLabel)
+    private func showEmptyScreen() {
+        let contentView = UIView(frame: CGRect(x: collectionView.bounds.origin.x, y: collectionView.bounds.origin.y, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
+        let blankImage = UIImage.init(named: "product_detail")
+        let detailImageView = UIImageView.init(frame: CGRect.zero)
+        detailImageView.image = blankImage
+        detailImageView.contentMode = .scaleAspectFit
+        detailImageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(detailImageView)
+
+        let widthConstraint = NSLayoutConstraint(item: detailImageView, attribute: .width, relatedBy: .equal,
+                                                 toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 100)
+        let heightConstraint = NSLayoutConstraint(item: detailImageView, attribute: .height, relatedBy: .equal,
+                                                  toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 100)
+        let xConstraint = NSLayoutConstraint(item: detailImageView, attribute: .centerX, relatedBy: .equal, toItem: contentView, attribute: .centerX, multiplier: 1, constant: 0)
+        let yConstraint = NSLayoutConstraint(item: detailImageView, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0)
+
+        NSLayoutConstraint.activate([widthConstraint, heightConstraint, xConstraint, yConstraint])
+        
         collectionView.backgroundView = contentView
     }
 }

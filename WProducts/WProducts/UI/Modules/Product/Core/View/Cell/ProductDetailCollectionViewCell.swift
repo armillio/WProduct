@@ -29,14 +29,6 @@ class ProductDetailCollectionViewCell: UICollectionViewCell, UICollectionViewCel
         self.productPrice.text = product.price
         self.reviewRating.rating = product.reviewRating ?? 0
         
-        if product.inStock {
-            self.inStock.image = UIImage.init(named: "stock")
-            self.inStockLabel.text = "In Stock"
-        }else{
-            self.inStock.image = UIImage.init(named: "no_stock")
-            self.inStockLabel.text = "No Stock"
-        }
-        
         let urlString = String.init(format:"%@%@", ApplicationConstants.APIBaseURL, product.image ?? "/")
         let url = URL.init(string: urlString)
         if url?.verifyUrl(url: url) ?? false {
@@ -63,5 +55,17 @@ class ProductDetailCollectionViewCell: UICollectionViewCell, UICollectionViewCel
             frameLongHeight = 20
         }
         self.productLongDescriptionHeightConstraint.constant = frameLongHeight
+        
+        if product.inStock == false {
+            self.productName.textColor = UIColor.systemGray
+            self.productPrice.textColor = UIColor.systemGray
+            self.inStock.image = UIImage.init(named: "no_stock")
+            self.inStockLabel.text = "No Stock"
+        }else{
+            self.productName.textColor = UIColor.init(named: "lightBlue")
+            self.productPrice.textColor = UIColor.init(named: "lightBlue")
+            self.inStock.image = UIImage.init(named: "stock")
+            self.inStockLabel.text = "In Stock"
+        }
     }
 }

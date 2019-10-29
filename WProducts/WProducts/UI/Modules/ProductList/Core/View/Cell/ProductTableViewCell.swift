@@ -35,12 +35,16 @@ class ProductTableViewCell: UITableViewCell, UITableViewCellStaticProtocol {
     }
     
     func configureCell(withProduct product: ProductViewModel){
+        if product.inStock == false {
+            self.productName.textColor = UIColor.systemGray
+            self.productPrice.textColor = UIColor.systemGray
+        }
         self.productName.text = product.name.trimmingCharacters(in: NSCharacterSet.whitespaces)
         self.productName.adjustHeightOfLabel()
         self.reviewCount.text = String.init(format: "(%d)", product.reviewCount ?? 0)
         self.productPrice.text = product.price
         self.reviewRating.rating = product.reviewRating ?? 0
-        let urlString = String.init(format:"%@%@ewewe", ApplicationConstants.APIBaseURL, product.image ?? "/")
+        let urlString = String.init(format:"%@%@", ApplicationConstants.APIBaseURL, product.image ?? "/")
         let url = URL.init(string: urlString)
         if url?.verifyUrl(url: url) ?? false {
             if let imageURL = url {

@@ -20,6 +20,7 @@ class ProductListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         displayActivityIndicator()
         configureNavigationBar()
         configureTableView()
@@ -41,6 +42,10 @@ class ProductListViewController: UIViewController {
     }
     
     // MARK: - Configuration
+    
+    private func configureUI(){
+        self.view.backgroundColor = UIColor.systemBackground
+    }
     
     private func configureTableView() {
         tableView.delegate = self

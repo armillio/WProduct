@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func configureMainViewController(_ application: UIApplication) {
         self.window = container.inject()
-        self.window!.backgroundColor = UIColor.white
+        self.window!.backgroundColor = UIColor.systemBackground
         self.window!.makeKeyAndVisible()
     }
 }

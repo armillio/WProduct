@@ -14,6 +14,7 @@ class ProductViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         loadData()
         configureCollectionView()
         configureLayout()
@@ -31,6 +32,10 @@ class ProductViewController: UIViewController {
     }
     
     // MARK: - Configuration
+    
+    private func configureUI(){
+        self.view.backgroundColor = UIColor.systemBackground
+    }
     
     private func configureCollectionView() {
         collectionView.delegate = self

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		471225672367A2D8001DDE80 /* URL+Extended.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471225662367A2D8001DDE80 /* URL+Extended.swift */; };
+		471225692367AE9D001DDE80 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 471225682367AE9D001DDE80 /* mock.json */; };
 		4730E4552364D490008C8873 /* ProductsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4730E4542364D490008C8873 /* ProductsManager.swift */; };
 		4730E4592364F5C3008C8873 /* ProductDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4730E4572364F5C3008C8873 /* ProductDetailCollectionViewCell.swift */; };
 		4730E45A2364F5C3008C8873 /* ProductDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4730E4582364F5C3008C8873 /* ProductDetailCollectionViewCell.xib */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		471225662367A2D8001DDE80 /* URL+Extended.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extended.swift"; sourceTree = "<group>"; };
+		471225682367AE9D001DDE80 /* mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mock.json; sourceTree = "<group>"; };
 		4730E4542364D490008C8873 /* ProductsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsManager.swift; sourceTree = "<group>"; };
 		4730E4572364F5C3008C8873 /* ProductDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		4730E4582364F5C3008C8873 /* ProductDetailCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		4757694A23626071005801D1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				471225682367AE9D001DDE80 /* mock.json */,
 				475769512362650C005801D1 /* Default-568h@2x.png */,
 				4757691823625E14005801D1 /* LaunchScreen.storyboard */,
 				477E0AC9236391E40003AE52 /* CosmosDistrib.swift */,
@@ -436,6 +439,7 @@
 			files = (
 				4757691A23625E14005801D1 /* LaunchScreen.storyboard in Resources */,
 				4757691723625E14005801D1 /* Assets.xcassets in Resources */,
+				471225692367AE9D001DDE80 /* mock.json in Resources */,
 				4757693923626037005801D1 /* ProductViewController.xib in Resources */,
 				4757695023626482005801D1 /* Colors.xcassets in Resources */,
 				4757694023626037005801D1 /* ProductListViewController.xib in Resources */,

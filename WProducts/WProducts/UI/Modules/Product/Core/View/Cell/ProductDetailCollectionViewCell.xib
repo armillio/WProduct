@@ -24,31 +24,31 @@
                                 <rect key="frame" x="0.0" y="0.0" width="418" height="547"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Ellerton TV Console" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lvH-00-OfE">
-                                        <rect key="frame" x="16" y="16" width="386" height="26.5"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <rect key="frame" x="16" y="16" width="386" height="24"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                         <color key="textColor" name="lightBlue"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTt-lD-0Jr">
-                                        <rect key="frame" x="94" y="336" width="28.5" height="13.5"/>
+                                        <rect key="frame" x="94" y="326.5" width="28.5" height="13.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KBZ-vh-SaP">
-                                        <rect key="frame" x="16" y="78.5" width="386" height="200"/>
+                                        <rect key="frame" x="16" y="76" width="386" height="200"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="zb3-kB-KsY"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="$949.00" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ut0-GB-J3p">
-                                        <rect key="frame" x="16" y="294.5" width="110.5" height="33.5"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <rect key="frame" x="16" y="292" width="87.5" height="26.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <color key="textColor" name="lightBlue"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="249" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXo-FY-5ZT">
-                                        <rect key="frame" x="16" y="365" width="386" height="30.5"/>
+                                        <rect key="frame" x="16" y="358.5" width="386" height="30.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30.5" id="rFs-RP-gY6"/>
                                         </constraints>
@@ -64,10 +64,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2l-8Y-ONH">
-                                        <rect key="frame" x="16" y="403.5" width="386" height="127.5"/>
+                                        <rect key="frame" x="16" y="397" width="386" height="134"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="127.5" id="o2l-S0-LZ6"/>
+                                            <constraint firstAttribute="height" constant="134" id="o2l-S0-LZ6"/>
                                         </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="&lt;p&gt;&lt;span style=&quot;color:#FF0000;&quot;&gt;&lt;b&gt;White Glove Delivery Included&lt;/b&gt;&lt;/span&gt;&lt;/p&gt;">
@@ -81,22 +81,23 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_stock" translatesAutoresizingMaskIntoConstraints="NO" id="3sE-z0-tg4">
-                                        <rect key="frame" x="16" y="50.5" width="20" height="20"/>
+                                        <rect key="frame" x="16" y="48" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="heI-I8-6HS"/>
                                             <constraint firstAttribute="width" constant="20" id="uhs-7O-exb"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In Stock" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHH-eM-HvR">
-                                        <rect key="frame" x="44" y="53.5" width="43" height="14"/>
+                                        <rect key="frame" x="44" y="51" width="43" height="14"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VzN-zr-rzO" customClass="CosmosView" customModule="WProducts" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="336" width="70" height="13"/>
+                                        <rect key="frame" x="16" y="326.5" width="70" height="16"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="16" id="2sc-oH-cdZ"/>
                                             <constraint firstAttribute="width" constant="70" id="VcB-od-aFk"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -142,6 +143,7 @@
                                     <constraint firstItem="ut0-GB-J3p" firstAttribute="leading" secondItem="t7w-PI-hN5" secondAttribute="leading" constant="16" id="UlM-Xi-dg3"/>
                                     <constraint firstItem="kTt-lD-0Jr" firstAttribute="top" secondItem="VzN-zr-rzO" secondAttribute="top" id="WPV-Uh-Sp4"/>
                                     <constraint firstItem="KBZ-vh-SaP" firstAttribute="top" secondItem="3sE-z0-tg4" secondAttribute="bottom" constant="8" id="XsG-EA-cOr"/>
+                                    <constraint firstAttribute="bottom" secondItem="m2l-8Y-ONH" secondAttribute="bottom" constant="16" id="ZW9-Bd-fM6"/>
                                     <constraint firstItem="lvH-00-OfE" firstAttribute="top" secondItem="t7w-PI-hN5" secondAttribute="top" constant="16" id="cmQ-vQ-1B8"/>
                                     <constraint firstAttribute="trailing" secondItem="vXo-FY-5ZT" secondAttribute="trailing" constant="16" id="eU7-LL-X1l"/>
                                     <constraint firstItem="zHH-eM-HvR" firstAttribute="leading" secondItem="3sE-z0-tg4" secondAttribute="trailing" constant="8" id="fAC-g4-YY8"/>
@@ -155,7 +157,6 @@
                                     <constraint firstItem="kTt-lD-0Jr" firstAttribute="leading" secondItem="VzN-zr-rzO" secondAttribute="trailing" constant="8" id="t8k-SL-g30"/>
                                     <constraint firstAttribute="trailing" secondItem="KBZ-vh-SaP" secondAttribute="trailing" constant="16" id="tid-Fw-D3X"/>
                                     <constraint firstItem="VzN-zr-rzO" firstAttribute="leading" secondItem="t7w-PI-hN5" secondAttribute="leading" constant="16" id="yaM-gK-C4C"/>
-                                    <constraint firstAttribute="bottom" secondItem="m2l-8Y-ONH" secondAttribute="bottom" constant="16" id="zM6-xV-Unr"/>
                                 </constraints>
                             </view>
                         </subviews>

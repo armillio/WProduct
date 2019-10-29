@@ -19,7 +19,7 @@ class ProductTableViewCell: UITableViewCell, UITableViewCellStaticProtocol {
         
         let label = UILabel.init()
         
-        let productName = label.determineLabelHeight(withWidth: contentViewWidth, withFont: UIFont.preferredFont(forTextStyle: .footnote), withText: product?.name)
+        let productName = label.determineLabelHeight(withWidth: contentViewWidth, withFont: UIFont.preferredFont(forTextStyle: .caption2), withText: product?.name)
         
         let reviewCount = label.determineLabelHeight(withWidth: contentViewWidth, withFont: UIFont.preferredFont(forTextStyle: .caption2), withText: String.init(format: "%ld", product?.reviewCount ?? 9999.99))
         

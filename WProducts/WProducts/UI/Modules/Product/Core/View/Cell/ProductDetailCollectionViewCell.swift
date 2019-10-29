@@ -40,14 +40,17 @@ class ProductDetailCollectionViewCell: UICollectionViewCell, UICollectionViewCel
         }
         
         self.productDescription.attributedText = product.shortDescription?.html
+        self.productDescription.font = UIFont.preferredFont(forTextStyle: .footnote)
         self.productDescription.adjustHeightOfLabel()
         var frameShortHeight = self.productDescription.frame.size.height
         if frameShortHeight < 20 {
             frameShortHeight = 20
         }
         self.productShortDescriptionHeightConstraint.constant = frameShortHeight
-        
+        self.productDescription.textColor = UIColor.init(named: "text")
+
         self.productLongDescription.attributedText = product.longDescription?.html
+        self.productLongDescription.font = UIFont.preferredFont(forTextStyle: .footnote)
         self.productLongDescription.isScrollEnabled = false
         self.productLongDescription.sizeToFit()
         var frameLongHeight = self.productLongDescription.frame.size.height
@@ -55,7 +58,8 @@ class ProductDetailCollectionViewCell: UICollectionViewCell, UICollectionViewCel
             frameLongHeight = 20
         }
         self.productLongDescriptionHeightConstraint.constant = frameLongHeight
-        
+        self.productLongDescription.textColor = UIColor.init(named: "text")
+
         if product.inStock == false {
             self.productName.textColor = UIColor.systemGray
             self.productPrice.textColor = UIColor.systemGray

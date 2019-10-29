@@ -1,8 +1,9 @@
 
-import Foundation
+import UIKit
 
 protocol WalmartHTTPRequest {
     func fetchProductListData(withPage page: Int, pageSize: Int, completion: @escaping (_ response: Bool, _ error: Error?) -> Void)
+    func fetchMockData(withPage page: Int, pageSize: Int, completion: @escaping (_ response: Bool, _ error: Error?) -> Void)
 }
 
 final class WalmartHTTPRequestDefault: WalmartHTTPRequest {
@@ -29,5 +30,19 @@ final class WalmartHTTPRequestDefault: WalmartHTTPRequest {
             }
             
         }.resume()
+    }
+    
+    func fetchMockData(withPage page: Int, pageSize: Int = 20, completion: @escaping (_ response: Bool, _ error: Error?) -> Void){
+        if let path = Bundle.main.path(forResource: "response", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let decoder = JSONDecoder()
+                let productList = try decoder.decode(ProductList.self, from: data)
+                ProductsManager.shared.addProducts(products: productList.products)
+                completion(true, nil)
+            } catch let err {
+                completion(false, err)
+            }
+        }
     }
 }

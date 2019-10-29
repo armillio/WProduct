@@ -35,10 +35,6 @@ class ProductTableViewCell: UITableViewCell, UITableViewCellStaticProtocol {
     }
     
     func configureCell(withProduct product: ProductViewModel){
-        if product.inStock == false {
-            self.productName.textColor = UIColor.systemGray
-            self.productPrice.textColor = UIColor.systemGray
-        }
         self.productName.text = product.name.trimmingCharacters(in: NSCharacterSet.whitespaces)
         self.productName.adjustHeightOfLabel()
         self.reviewCount.text = String.init(format: "(%d)", product.reviewCount ?? 0)
@@ -52,6 +48,14 @@ class ProductTableViewCell: UITableViewCell, UITableViewCellStaticProtocol {
             }
         }else{
             self.productImage.image = UIImage.init(named: "no_image")
+        }
+
+        if product.inStock == false {
+            self.productName.textColor = UIColor.systemGray
+            self.productPrice.textColor = UIColor.systemGray
+        }else{
+            self.productName.textColor = UIColor.init(named: "lightBlue")
+            self.productPrice.textColor = UIColor.init(named: "lightBlue")
         }
     }
 }

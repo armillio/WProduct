@@ -5,7 +5,7 @@ struct ProductList: Codable {
     var products: [Product]
 }
 
-struct Product:Codable {
+struct Product:Codable, Equatable {
     let id: String
     let name: String
     let shortDescription: String?

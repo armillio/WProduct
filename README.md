@@ -1,4 +1,4 @@
-## Walmart Products
+## Products
 
 **Description**:
 
@@ -6,7 +6,7 @@ Create a new application that is integrated with our product API (documentation 
 
 **API**:
 
-Documentation:  https://mobile-tha-server.firebaseapp.com/
+Documentation: 
 
 **Screen 1**:
 
